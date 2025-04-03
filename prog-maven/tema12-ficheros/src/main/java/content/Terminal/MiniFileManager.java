@@ -2,6 +2,8 @@ package content.Terminal;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -44,7 +46,8 @@ class MiniFileManager {
             return;
         }
 
-        File file = new File(getPwd() + "/" + dir);
+        Path path = Paths.get(dir).toAbsolutePath();
+        File file = new File(path.toUri());
 
         if (file.isDirectory()) {
             MiniTerminal.directorioActual = file;
@@ -96,8 +99,14 @@ class MiniFileManager {
     }
 
     public void crearDirectorio(String ruta) {
-        File nuevaCarpeta = new File(ruta);
-        nuevaCarpeta.mkdir();
+
+        File path = new File(ruta);
+        File nuevaCarpeta = new File(MiniTerminal.getDirectorioActual() + "/" + ruta);
+        if (path.isAbsolute())
+            path.mkdir();
+        else
+            nuevaCarpeta.mkdir();
+
     }
 
     public void remove(String rutaString) {
