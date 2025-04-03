@@ -1,5 +1,6 @@
-package content.EjerciciosB;
+package prog.tema12.EjerciciosB;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -9,6 +10,7 @@ import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +20,7 @@ import java.util.stream.Collectors;
 import utilidades.Persona;
 
 public class Ejercicio8B {
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws URISyntaxException {
         Scanner scanner = new Scanner(System.in);
         URL url = Ejercicio8B.class.getClassLoader().getResource("Documentos/datos_personas.csv");
         HashMap<String, Persona> mapa = new HashMap<>();
@@ -45,22 +46,24 @@ public class Ejercicio8B {
                     .forEach(s -> System.out.println("Dni: " + s.getKey() + " Informacion: " + s.getValue()));
         }
 
-        url = Ejercicio8B.class.getClassLoader().getResource("Documentos/datos_jubilados.csv");
-        List<String> lista = mapa.entrySet().stream().sorted(Map.Entry.comparingByKey((s1, s2) -> s1.compareTo(s2)))
-                .map(s1 -> s1.getKey())
-                .collect(Collectors.toList());
+        List<Persona> lista = mapa.entrySet().stream().filter(s -> s.getValue().esJubilado())
+                .sorted(Map.Entry.comparingByKey((s1, s2) -> s1.compareTo(s2)))
+                .map(Map.Entry::getValue).toList();
+        File file = new File(
+                "C:/Users/juani/Documents/clase/src/main/java/prog/tema12/EjerciciosB/resultado8/datos_jubilados.csv");
 
         try {
-            Path ruta = Paths.get(url.toURI());
-            for (String dni : lista) {
-                Persona p = mapa.get(dni);
-                if (p.esJubilado())
-                    Files.write(ruta,
-                            p.getDni() + ";" + p.getNombre() + ";" + p.getApellidos() + ";" + p.getEdad() + ";",
-                            StandardOpenOption.WRITE);
-
+            if (!file.exists())
+                file.createNewFile();
+            Path ruta = Paths.get(file.toURI());
+            for (Persona persona : lista) {
+                Files.write(ruta,
+                        (persona.getDni() + ";" + persona.getNombre() + ";" + persona.getApellidos() + ";"
+                                + persona.getEdad() + "\n")
+                                .getBytes(),
+                        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             }
-        } catch (URISyntaxException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
