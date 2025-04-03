@@ -1,4 +1,4 @@
-package content.grr;
+package content.Terminal;
 
 import java.io.File;
 import java.io.FileNotFoundException;
