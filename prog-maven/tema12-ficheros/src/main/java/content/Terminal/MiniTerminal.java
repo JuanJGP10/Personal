@@ -2,136 +2,143 @@ package content.Terminal;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.InetAddress;
 import java.util.Scanner;
-import java.net.UnknownHostException;
 
+/**
+ * La clase {@code MiniTerminal} simula una terminal básica de comandos, similar
+ * a un shell.
+ * Permite ejecutar comandos como {@code pwd}, {@code cd}, {@code ls},
+ * {@code mkdir}, {@code rm}, {@code mv},
+ * y otros para interactuar con el sistema de archivos.
+ */
 public class MiniTerminal {
+
+    /**
+     * Directorio actual de trabajo, por defecto es el directorio de trabajo actual
+     * del sistema.
+     */
     protected static File directorioActual = new File(System.getProperty("user.dir"));
+
+    /**
+     * Instancia de {@link MiniFileManager} utilizada para realizar operaciones en
+     * el sistema de archivos.
+     */
     private static MiniFileManager mfm = new MiniFileManager();
-    private static String username;
-    private static String computerName;
-    public static final String GREEN = "\033[1;32m"; // Verde para usuario@host
-    public static final String BLUE = "\033[1;34m"; // Azul para el directorio
-    public static final String RESET = "\033[0m"; // Reset para volver al color normal
-    private static final String os = System.getProperty("os.name").toLowerCase();
 
-    public static String getComputername() {
-        try {
-            computerName = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            computerName = "unknown-host";
-        }
-        return computerName;
-    }
-
-    public static String getUsername() {
-
-        if (os.contains("win")) {
-            // Para Windows
-            username = System.getenv("USERNAME");
-        } else {
-            // Para Linux/Unix/Mac
-            username = System.getenv("USER");
-        }
-        return username;
-    }
-
+    /**
+     * Obtiene el directorio actual de trabajo.
+     *
+     * @return El directorio actual.
+     */
     public static File getDirectorioActual() {
         return directorioActual;
     }
 
-    public static String getPrompt() {
-
-        String prompt = directorioActual.getAbsolutePath().replace('\\', '/');
-        if (os.contains("win"))
-            prompt = prompt.substring(2, prompt.length());
-
-        return String.format("%s%s@%s%s:~%s%s%s$  ", GREEN, getUsername(), getComputername(), RESET, BLUE, prompt,
-                RESET);
+    /**
+     * Valida los argumentos para los comandos de la terminal.
+     * Asegura que el número de argumentos esté dentro del rango válido.
+     *
+     * @param comando El nombre del comando que se está ejecutando.
+     * @param args    Los argumentos pasados al comando.
+     * @param min     El número mínimo de argumentos esperados.
+     * @param max     El número máximo de argumentos esperados.
+     * @return {@code true} si el número de argumentos es válido, {@code false} en
+     *         caso contrario.
+     */
+    private static boolean validarArgumentos(String comando, String[] args, int min, int max) {
+        if (args.length < min) {
+            System.out.println("bash: " + comando + ": Faltan argumentos");
+        } else if (args.length > max) {
+            System.out.println("bash: " + comando + ": Demasiados argumentos");
+        }
+        return args.length >= min && args.length <= max;
     }
 
+    /**
+     * Método principal que ejecuta la terminal. Lee los comandos introducidos por
+     * el usuario,
+     * procesa los argumentos y llama a los métodos correspondientes en
+     * {@link MiniFileManager}.
+     *
+     * @param args Argumentos de la línea de comandos (no utilizados en este caso).
+     */
     public static void main(String[] args) {
         String comando;
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
+        // Bucle principal de la terminal
         while (running) {
 
-            System.out.print(getPrompt());
-            comando = scanner.nextLine().trim();
+            System.out.print(mfm.getPrompt()); // Muestra el prompt de la terminal
+            comando = scanner.nextLine().trim(); // Lee el comando introducido por el usuario
 
-            String[] argumentos = comando.split(" ", 3);
+            String[] argumentos = comando.split(" "); // Separa los argumentos del comando
 
+            // Switch que ejecuta diferentes comandos dependiendo del input del usuario
             switch (argumentos[0]) {
 
-                case "pwd" -> {
-                    if (argumentos.length == 1)
-                        System.out.println(mfm.getPwd());
-                    else
-                        System.out.println("bash: pwd: Demasiados argumentos");
-                }
+                case "pwd" -> System.out.println(validarArgumentos("pwd", argumentos, 1, 1) ? mfm.getPwd() : "");
 
                 case "cd" -> {
-                    if (argumentos.length == 2) {
+                    if (validarArgumentos("cd", argumentos, 2, 2))
                         mfm.cd(argumentos[1]);
-                    } else
-                        System.out.println("bash: cd: Demasiados argumentos");
+
                 }
 
                 case "ls" -> {
-                    if (argumentos.length == 1) {
+                    if (validarArgumentos("ls", argumentos, 1, 2)) {
                         try {
                             mfm.ls(directorioActual, false);
                         } catch (FileNotFoundException e) {
-                            e.getMessage();
+                            System.out.println("bash: ls: No se encontró el archivo o directorio");
                         }
-                    } else
-                        System.out.println("bash: ls: Demasiados argumentos");
+                    }
                 }
 
                 case "ll" -> {
-                    if (argumentos.length == 1) {
+                    if (validarArgumentos("ll", argumentos, 1, 2)) {
                         try {
                             mfm.ls(directorioActual, true);
                         } catch (FileNotFoundException e) {
-                            e.getMessage();
+                            System.out.println("bash: ls: No se encontró el archivo o directorio");
                         }
-                    } else
-                        System.out.println("bash: ll: Demasiados argumentos");
+                    }
                 }
 
                 case "mkdir" -> {
-                    if (argumentos.length == 2) {
+                    if (validarArgumentos("mkdir", argumentos, 2, 2))
                         mfm.crearDirectorio(argumentos[1]);
-                    } else
-                        System.out.println("bash: mkdir: Demasiados argumentos");
+
                 }
 
                 case "rm" -> {
-                    if (argumentos.length == 2) {
+                    if (validarArgumentos("rm", argumentos, 2, 2))
                         mfm.remove(argumentos[1]);
-                    } else
-                        System.out.println("bash: rm: Demasiados argumentos");
+
                 }
 
                 case "mv" -> {
-                    if (argumentos.length == 3) {
+                    if (validarArgumentos("mv", argumentos, 3, 3))
                         mfm.move(argumentos[1], argumentos[2]);
-                    } else
-                        System.out.println("bash: mv: Demasiados argumentos");
+
                 }
 
-                case "help" -> {
-                    mfm.help();
+                case "help" -> mfm.help();
+
+                case "mostrar" -> {
+                    if (validarArgumentos("mostrar", argumentos, 2, 2))
+                        mfm.mostrar(argumentos[1]);
+                }
+
+                case "sustituir" -> {
+                    if (validarArgumentos("sustituir", argumentos, 4, 4))
+                        mfm.sustituir(argumentos[1], argumentos[2], argumentos[3]);
                 }
 
                 default -> System.out.println("bash: Comando no reconocido");
 
-                case "exit" -> {
-                    System.out.println("Saliendo...");
-                    running = false;
-                }
+                case "exit" -> running = false;
             }
         }
     }
