@@ -160,19 +160,21 @@ class MiniFileManager {
      * Crea un nuevo directorio en la ubicación actual.
      * 
      * @param ruta Nombre del nuevo directorio.
+     * @return true si el directorio se creó correctamente.
      * @throws FileManagerException si ya existe.
      */
-    public void crearDirectorio(String ruta) throws FileManagerException {
+    public boolean crearDirectorio(String ruta) throws FileManagerException {
         File nuevaCarpeta = new File(MiniTerminal.getDirectorioActual(), ruta);
         if (nuevaCarpeta.exists())
             throw new FileManagerException(" Ya existe este directorio");
-        nuevaCarpeta.mkdir();
+        return nuevaCarpeta.mkdir();
     }
 
     /**
      * Elimina archivos o contenido de un directorio.
      * 
      * @param rutaString Ruta del archivo o directorio.
+     * @return true si el borrado se realizó correctamente.
      * @throws FileManagerException si el archivo no existe o tiene subcarpetas.
      */
     public void remove(String rutaString) throws FileManagerException {
