@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"content.Terminal","l":"FileManagerException"},{"p":"content.Terminal","l":"MiniFileManager"},{"p":"content.Terminal","l":"MiniTerminal"}];updateSearchResults();
