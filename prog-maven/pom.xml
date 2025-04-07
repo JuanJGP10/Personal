@@ -40,6 +40,14 @@
       <scope>test</scope>
           
     </dependency>
+
+    <dependency>
+      <groupId>utilidades</groupId>
+      <artifactId>persona</artifactId>
+      <scope>system</scope>
+      <version>1.0</version>
+      <systemPath>${basedir}/lib/Persona.jar</systemPath>
+    </dependency>
       
   </dependencies>
     
