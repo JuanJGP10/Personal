@@ -169,6 +169,8 @@ public class MiniTerminal {
                 case "sustituir" -> {
                     if (validarArgumentos("sustituir", argumentos, 4, 4)) {
                         try {
+                            // Si quieres poner frases para cadena original y final debes ponerlas entre
+                            // comillas
                             mfm.sustituir(argumentos[1], argumentos[2], argumentos[3]);
                         } catch (FileManagerException e) {
                             System.out.println(e.getMessage());
