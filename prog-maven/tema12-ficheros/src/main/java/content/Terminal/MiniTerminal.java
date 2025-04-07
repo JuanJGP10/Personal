@@ -77,12 +77,7 @@ public class MiniTerminal {
             comando = scanner.nextLine().trim();
 
             // Separa los argumentos considerando comillas dobles
-            String[] argumentos = comando.split(" (?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-
-            // Elimina comillas al inicio y final de cada argumento
-            for (int i = 0; i < argumentos.length; i++) {
-                argumentos[i] = argumentos[i].replaceAll("^\"|\"$", "");
-            }
+            String[] argumentos = comando.split(" ");
 
             // Procesa el comando
             switch (argumentos[0]) {
@@ -167,13 +162,25 @@ public class MiniTerminal {
                 }
 
                 case "sustituir" -> {
-                    if (validarArgumentos("sustituir", argumentos, 4, 4)) {
-                        try {
-                            mfm.sustituir(argumentos[1], argumentos[2], argumentos[3]);
-                        } catch (FileManagerException e) {
-                            System.out.println(e.getMessage());
+
+                    try {
+                        String argumento2;
+                        String argumento3;
+
+                        if (argumentos.length < 4) {
+                            argumento2 = argumentos[2];
+                            argumento3 = argumentos[3];
+                        } else {
+                            argumento2 = comando.substring(comando.indexOf("<") + 1, comando.indexOf(">"));
+                            argumento3 = comando.substring(comando.lastIndexOf("<") + 1, comando.lastIndexOf(">"));
                         }
+
+                        mfm.sustituir(argumentos[1], argumento2, argumento3);
+
+                    } catch (FileManagerException e) {
+                        System.out.println(e.getMessage());
                     }
+
                 }
 
                 case "exit" -> running = false;
