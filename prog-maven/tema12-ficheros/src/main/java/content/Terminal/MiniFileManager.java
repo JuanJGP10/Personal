@@ -174,7 +174,6 @@ class MiniFileManager {
      * Elimina archivos o contenido de un directorio.
      * 
      * @param rutaString Ruta del archivo o directorio.
-     * @return true si el borrado se realizó correctamente.
      * @throws FileManagerException si el archivo no existe o tiene subcarpetas.
      */
     public void remove(String rutaString) throws FileManagerException {
