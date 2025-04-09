@@ -26,9 +26,9 @@ public class ControladorRGB {
 
     @FXML
     private void cambioDeslizantes() {
-        r.setText(String.valueOf(Math.round(deslizadorR.getValue())));
-        g.setText(String.valueOf(Math.round(deslizadorG.getValue())));
-        b.setText(String.valueOf(Math.round(deslizadorB.getValue())));
+        r.setText(String.valueOf((int) deslizadorR.getValue()));
+        g.setText(String.valueOf((int) deslizadorG.getValue()));
+        b.setText(String.valueOf((int) deslizadorB.getValue()));
     }
 
     @FXML
@@ -67,7 +67,9 @@ public class ControladorRGB {
         String hexadecimalG = Integer.toHexString(decimalG);
         String hexadecimalB = Integer.toHexString(decimalB);
 
-        etiqueta.setText(hexadecimalR + hexadecimalG + hexadecimalB);
+        etiqueta.setText(("#" + (hexadecimalR.length() == 1 ? "0" : "") + hexadecimalR + (hexadecimalG.length() == 1
+                ? "0"
+                : "") + hexadecimalG + (hexadecimalB.length() == 1 ? "0" : "") + hexadecimalB).toUpperCase());
     }
 
 }
