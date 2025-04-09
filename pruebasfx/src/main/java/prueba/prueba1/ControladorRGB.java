@@ -8,11 +8,11 @@ import javafx.scene.layout.Pane;
 
 public class ControladorRGB {
     @FXML
-    TextField r;
+    TextField textoR;
     @FXML
-    TextField g;
+    TextField textoG;
     @FXML
-    TextField b;
+    TextField textoB;
     @FXML
     Slider deslizadorR;
     @FXML
@@ -25,51 +25,71 @@ public class ControladorRGB {
     Label etiqueta;
 
     @FXML
-    private void cambioDeslizantes() {
-        r.setText(String.valueOf((int) deslizadorR.getValue()));
-        g.setText(String.valueOf((int) deslizadorG.getValue()));
-        b.setText(String.valueOf((int) deslizadorB.getValue()));
+    private void cambioDeslizantes(Slider slider, TextField tf) {
+        // Setteamos el texto al valor nuevo del slider
+        tf.setText(String.valueOf((int) slider.getValue()));
+        // Cambiamos el color del panel
+        setColorPane();
     }
 
     @FXML
     private void initialize() {
-        deslizadorR.valueProperty().addListener(observable -> {
-            cambioDeslizantes();
-            setColorPane();
-            setHexadecimal();
-        });
-        deslizadorG.valueProperty().addListener(observable -> {
-            cambioDeslizantes();
-            setColorPane();
-            setHexadecimal();
-        });
-        deslizadorB.valueProperty().addListener(observable -> {
-            cambioDeslizantes();
-            setColorPane();
-            setHexadecimal();
+        /*
+         * Especie de triggers que ejecutan el metodo cambioDeslizantes o
+         * cambioTextFields cuando se mueve
+         * un deslizador o cambia una textField
+         */
+        deslizadorR.valueProperty().addListener(observer -> cambioDeslizantes(deslizadorR, textoR));
+        deslizadorG.valueProperty().addListener(observer -> cambioDeslizantes(deslizadorG, textoG));
+        deslizadorB.valueProperty().addListener(observer -> cambioDeslizantes(deslizadorB, textoB));
 
-        });
-
+        textoR.textProperty().addListener(observer -> cambioTextFields(deslizadorR, textoR));
+        textoG.textProperty().addListener(observer -> cambioTextFields(deslizadorG, textoG));
+        textoB.textProperty().addListener(observer -> cambioTextFields(deslizadorB, textoB));
     }
 
     @FXML
     private void setColorPane() {
+        // Agregamos el color correspondiente al panel
         String color = "rgb(" + deslizadorR.getValue() + "," + deslizadorG.getValue() + "," + deslizadorB.getValue()
                 + ")";
-        panelColor.setStyle("-fx-background-color:" + color);
-    }
-
-    private void setHexadecimal() {
+        panelColor
+                .setStyle("-fx-background-color:" + color + ";\n -fx-border-style: solid; \n -fx-border-width: 5px}");
+        // Sacamos el valor en formato web del color
         int decimalR = (int) deslizadorR.getValue();
         int decimalG = (int) deslizadorG.getValue();
         int decimalB = (int) deslizadorB.getValue();
         String hexadecimalR = Integer.toHexString(decimalR);
         String hexadecimalG = Integer.toHexString(decimalG);
         String hexadecimalB = Integer.toHexString(decimalB);
-
+        // Agregamos a la etiqueta
         etiqueta.setText(("#" + (hexadecimalR.length() == 1 ? "0" : "") + hexadecimalR + (hexadecimalG.length() == 1
                 ? "0"
                 : "") + hexadecimalG + (hexadecimalB.length() == 1 ? "0" : "") + hexadecimalB).toUpperCase());
+    }
+
+    @FXML
+    private void cambioTextFields(Slider slider, TextField tf) {
+        /*
+         * Validamos el valor escrito en la textField y si es valido efectuamos el
+         * cambio al slider
+         */
+        if (validator(tf.getText())) {
+            int numero = Integer.parseInt(tf.getText());
+            if (numero >= 0 && numero <= 255)
+                slider.setValue(numero);
+        }
+
+    }
+
+    private boolean validator(String numero) {
+        // Validamos si es un numero o tiene otro formato
+        try {
+            int var = Integer.parseInt(numero);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 }
