@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-border-style: solid;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prueba.prueba1.ControladorRGB">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-border-style: solid; -fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prueba.prueba1.ControladorRGB">
    <children>
       <Slider fx:id="deslizadorR" layoutX="385.0" layoutY="37.0" max="255.0" orientation="VERTICAL" prefHeight="306.0" prefWidth="14.0" />
       <Slider fx:id="deslizadorG" layoutX="436.0" layoutY="37.0" max="255.0" orientation="VERTICAL" prefHeight="306.0" prefWidth="14.0" />

@@ -62,7 +62,10 @@ public class ControladorRGB {
         String hexadecimalR = Integer.toHexString(decimalR);
         String hexadecimalG = Integer.toHexString(decimalG);
         String hexadecimalB = Integer.toHexString(decimalB);
-        // Agregamos a la etiqueta
+        /*
+         * Agregamos a la etiqueta y la formateamos para que en caso de que el
+         * hexadecimal sea solo un numero salga el 0 al lado
+         */
         etiqueta.setText(("#" + (hexadecimalR.length() == 1 ? "0" : "") + hexadecimalR + (hexadecimalG.length() == 1
                 ? "0"
                 : "") + hexadecimalG + (hexadecimalB.length() == 1 ? "0" : "") + hexadecimalB).toUpperCase());
