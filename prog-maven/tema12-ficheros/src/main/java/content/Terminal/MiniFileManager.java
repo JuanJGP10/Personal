@@ -174,11 +174,11 @@ class MiniFileManager {
      * Elimina archivos o contenido de un directorio.
      * 
      * @param rutaString Ruta del archivo o directorio.
-     * @return true si el borrado se realizó correctamente.
      * @throws FileManagerException si el archivo no existe o tiene subcarpetas.
      */
     public void remove(String rutaString) throws FileManagerException {
         File ruta = new File(MiniTerminal.getDirectorioActual(), rutaString);
+        boolean tieneSubcarpetas = false;
         if (!ruta.exists())
             throw new FileManagerException("No existe el archivo o direcorio");
 
@@ -186,13 +186,14 @@ class MiniFileManager {
             ruta.delete();
             return;
         }
+        if (ruta.isDirectory()) {
 
-        boolean tieneSubcarpetas = false;
-        for (File f : ruta.listFiles()) {
-            if (f.isDirectory())
-                tieneSubcarpetas = true;
-            else
-                f.delete();
+            for (File f : ruta.listFiles()) {
+                if (f.isDirectory())
+                    tieneSubcarpetas = true;
+                else
+                    f.delete();
+            }
         }
 
         if (tieneSubcarpetas)
@@ -253,8 +254,8 @@ class MiniFileManager {
         File file = new File(MiniTerminal.getDirectorioActual(), fichero);
         Path ruta = Paths.get(file.toURI());
 
-        if (!Files.exists(ruta))
-            throw new FileManagerException("No es un fichero");
+        if (!Files.exists(ruta) || Files.isDirectory(ruta))
+            throw new FileManagerException("No es un fichero válido");
 
         try {
 
@@ -278,8 +279,8 @@ class MiniFileManager {
         File file = new File(MiniTerminal.getDirectorioActual(), fichero);
         Path ruta = Paths.get(file.toURI());
 
-        if (!Files.exists(ruta))
-            throw new FileManagerException("No es un fichero");
+        if (!Files.exists(ruta) || Files.isDirectory(ruta))
+            throw new FileManagerException("No es un fichero válido");
 
         try {
 
