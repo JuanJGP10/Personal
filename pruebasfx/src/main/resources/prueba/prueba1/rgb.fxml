@@ -1,26 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-border-style: solid; -fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prueba.prueba1.ControladorRGB">
-   <children>
-      <Slider fx:id="deslizadorR" layoutX="385.0" layoutY="37.0" max="255.0" orientation="VERTICAL" prefHeight="306.0" prefWidth="14.0" />
-      <Slider fx:id="deslizadorG" layoutX="436.0" layoutY="37.0" max="255.0" orientation="VERTICAL" prefHeight="306.0" prefWidth="14.0" />
-      <Slider fx:id="deslizadorB" layoutX="488.0" layoutY="37.0" max="255.0" orientation="VERTICAL" prefHeight="306.0" prefWidth="14.0" />
-      <Pane fx:id="panelColor" layoutX="51.0" layoutY="21.0" prefHeight="358.0" prefWidth="249.0" style="-fx-border-color: black; -fx-border-width: 5;" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="380.0" layoutY="9.0" prefHeight="25.0" prefWidth="24.0" style="-fx-background-color: red; -fx-border-color: black;" text="R" textAlignment="JUSTIFY" textFill="WHITE">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font></Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="431.0" layoutY="9.0" prefHeight="25.0" prefWidth="24.0" style="-fx-background-color: green; -fx-border-color: black;" text="G" textFill="WHITE" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="483.0" layoutY="9.0" prefHeight="25.0" prefWidth="24.0" style="-fx-background-color: blue; -fx-border-color: black;" text="B" textFill="WHITE" />
-      <Label fx:id="etiqueta" alignment="CENTER" contentDisplay="CENTER" layoutX="377.0" layoutY="375.0" prefHeight="25.0" prefWidth="133.0" style="-fx-font-weight: bold;" text="Label" />
-      <TextField fx:id="textoR" alignment="CENTER" layoutX="370.0" layoutY="349.0" prefHeight="25.0" prefWidth="44.0" />
-      <TextField fx:id="textoG" alignment="CENTER" layoutX="421.0" layoutY="349.0" prefHeight="25.0" prefWidth="44.0" />
-      <TextField fx:id="textoB" alignment="CENTER" layoutX="473.0" layoutY="349.0" prefHeight="25.0" prefWidth="44.0" />
-   </children>
-</Pane>
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prueba.prueba1.ControladorRGB">
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="etiqueta" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="241.0" style="-fx-font-weight: bold;" text="Label" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="40.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="textoG" alignment="CENTER" prefHeight="26.0" prefWidth="47.0">
+               <HBox.margin>
+                  <Insets left="35.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+            <TextField fx:id="textoB" alignment="CENTER" prefHeight="26.0" prefWidth="45.0">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+            <TextField fx:id="textoR" alignment="CENTER" prefHeight="26.0" prefWidth="48.0">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <HBox prefHeight="42.0" prefWidth="511.0" BorderPane.alignment="BOTTOM_RIGHT">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="24.0" style="-fx-background-color: red; -fx-border-color: white;" text="R" textAlignment="JUSTIFY" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="330.0" right="30.0" top="15.0" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="24.0" style="-fx-background-color: green; -fx-border-color: white;" text="G" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="30.0" top="15.0" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="24.0" style="-fx-background-color: blue; -fx-border-color: white;" text="B" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="30.0" top="15.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <right>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Slider fx:id="deslizadorR" max="255.0" orientation="VERTICAL" prefHeight="316.0" prefWidth="7.0">
+               <HBox.margin>
+                  <Insets left="25.0" right="35.0" />
+               </HBox.margin>
+            </Slider>
+            <Slider fx:id="deslizadorG" max="255.0" orientation="VERTICAL" prefHeight="306.0" prefWidth="14.0">
+               <HBox.margin>
+                  <Insets left="4.0" right="35.0" />
+               </HBox.margin>
+            </Slider>
+            <Slider fx:id="deslizadorB" max="255.0" orientation="VERTICAL" prefHeight="306.0" prefWidth="14.0">
+               <HBox.margin>
+                  <Insets left="5.0" right="35.0" />
+               </HBox.margin>
+            </Slider>
+         </children>
+      </HBox>
+   </right>
+   <center>
+      <Pane fx:id="panelColor1" prefHeight="316.0" prefWidth="139.0" style="-fx-border-color: white; -fx-border-width: 5;" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

@@ -56,12 +56,9 @@ public class ControladorRGB {
         panelColor
                 .setStyle("-fx-background-color:" + color + ";\n -fx-border-style: solid; \n -fx-border-width: 5px}");
         // Sacamos el valor en formato web del color
-        int decimalR = (int) deslizadorR.getValue();
-        int decimalG = (int) deslizadorG.getValue();
-        int decimalB = (int) deslizadorB.getValue();
-        String hexadecimalR = Integer.toHexString(decimalR);
-        String hexadecimalG = Integer.toHexString(decimalG);
-        String hexadecimalB = Integer.toHexString(decimalB);
+        String hexadecimalR = Integer.toHexString((int) deslizadorR.getValue());
+        String hexadecimalG = Integer.toHexString((int) deslizadorG.getValue());
+        String hexadecimalB = Integer.toHexString((int) deslizadorB.getValue());
         /*
          * Agregamos a la etiqueta y la formateamos para que en caso de que el
          * hexadecimal sea solo un numero salga el 0 al lado
@@ -82,7 +79,6 @@ public class ControladorRGB {
             if (numero >= 0 && numero <= 255)
                 slider.setValue(numero);
         }
-
     }
 
     private boolean validator(String numero) {
