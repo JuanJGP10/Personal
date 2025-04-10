@@ -20,9 +20,8 @@ public class App extends Application {
         scene = new Scene(loadFXML("rgb"), 640, 480);
         stage.setScene(scene);
         stage.setTitle("Selector de colores - Juan");
-        stage.setMinHeight(500);
-        stage.setMinWidth(600);
-        stage.centerOnScreen();
+        stage.setMinHeight(600);
+        stage.setMinWidth(770);
         stage.show();
     }
 

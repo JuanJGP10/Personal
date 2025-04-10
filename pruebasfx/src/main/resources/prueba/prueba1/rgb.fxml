@@ -9,26 +9,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prueba.prueba1.ControladorRGB">
+<BorderPane style="-fx-background-color: #00304E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prueba.prueba1.ControladorRGB">
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="etiqueta" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="241.0" style="-fx-font-weight: bold;" text="Label" textFill="WHITE">
                <HBox.margin>
-                  <Insets right="40.0" />
+                  <Insets left="40.0" right="3.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="textoG" alignment="CENTER" prefHeight="26.0" prefWidth="47.0">
+            <TextField fx:id="textoR" alignment="CENTER" prefHeight="26.0" prefWidth="47.0">
                <HBox.margin>
                   <Insets left="35.0" top="10.0" />
                </HBox.margin>
             </TextField>
-            <TextField fx:id="textoB" alignment="CENTER" prefHeight="26.0" prefWidth="45.0">
+            <TextField fx:id="textoG" alignment="CENTER" prefHeight="26.0" prefWidth="45.0">
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </TextField>
-            <TextField fx:id="textoR" alignment="CENTER" prefHeight="26.0" prefWidth="48.0">
+            <TextField fx:id="textoB" alignment="CENTER" prefHeight="26.0" prefWidth="48.0">
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
@@ -68,7 +68,7 @@
          <children>
             <Slider fx:id="deslizadorR" max="255.0" orientation="VERTICAL" prefHeight="316.0" prefWidth="7.0">
                <HBox.margin>
-                  <Insets left="25.0" right="35.0" />
+                  <Insets left="17.0" right="35.0" />
                </HBox.margin>
             </Slider>
             <Slider fx:id="deslizadorG" max="255.0" orientation="VERTICAL" prefHeight="306.0" prefWidth="14.0">
@@ -85,6 +85,12 @@
       </HBox>
    </right>
    <center>
-      <Pane fx:id="panelColor1" prefHeight="316.0" prefWidth="139.0" style="-fx-border-color: white; -fx-border-width: 5;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="panelColor" prefHeight="316.0" prefWidth="260.0" style="-fx-border-color: white; -fx-border-width: 5;" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets left="30.0" right="30.0" />
+         </BorderPane.margin></Pane>
    </center>
 </BorderPane>
