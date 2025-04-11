@@ -54,7 +54,8 @@ public class ControladorRGB {
         String color = "rgb(" + deslizadorR.getValue() + "," + deslizadorG.getValue() + "," + deslizadorB.getValue()
                 + ")";
         panelColor
-                .setStyle("-fx-background-color:" + color + ";\n -fx-border-style: solid; \n -fx-border-width: 5px}");
+                .setStyle("-fx-background-color:" + color
+                        + "; -fx-border-style: solid;  -fx-border-width: 5px; -fx-border-color: white;}");
         // Sacamos el valor en formato web del color
         String hexadecimalR = Integer.toHexString((int) deslizadorR.getValue());
         String hexadecimalG = Integer.toHexString((int) deslizadorG.getValue());

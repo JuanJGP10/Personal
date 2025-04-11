@@ -17,11 +17,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("rgb"), 640, 480);
+        scene = new Scene(loadFXML("rgbv2"), 640, 480);
         stage.setScene(scene);
         stage.setTitle("Selector de colores - Juan");
-        stage.setMinHeight(600);
-        stage.setMinWidth(770);
+        stage.setMinHeight(300);
+        stage.setMinWidth(500);
         stage.show();
     }
 
