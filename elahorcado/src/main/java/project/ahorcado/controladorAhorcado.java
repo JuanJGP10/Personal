@@ -11,28 +11,40 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.TilePane;
 
+/**
+ * Controlador principal del juego del Ahorcado en JavaFX.
+ * Controla la lógica del juego, interfaz gráfica y eventos de usuario.
+ */
 public class controladorAhorcado {
 
+    /** Número de fallos cometidos por el jugador. */
     private int fallos = 0;
+
+    /** Lista de letras que el jugador ya ha pulsado. */
     private ArrayList<Character> letrasPulsadas = new ArrayList<>();
+
+    /** Palabra que el jugador debe adivinar. */
     private String palabraAdivinar;
+
+    /** Número máximo de fallos permitidos antes de perder. */
     public static final int MAX_FALLOS = 6;
 
     @FXML
-    SplitPane panel;
+    BorderPane borderPanel;
 
     @FXML
-    AnchorPane panelDerecho;
+    TilePane panelBotones;
 
     @FXML
     Label titulo;
@@ -46,6 +58,10 @@ public class controladorAhorcado {
     @FXML
     ImageView imagenJuego;
 
+    /**
+     * Método que se llama automáticamente al inicializar el controlador.
+     * Prepara la interfaz y comienza una nueva partida.
+     */
     @FXML
     private void initialize() {
         elegirPalabraRandom();
@@ -55,109 +71,108 @@ public class controladorAhorcado {
         imagenJuego.setImage(new Image(
                 controladorAhorcado.class.getResourceAsStream("/project/ahorcado/ahorcado.png")));
         generarLetras();
-
     }
 
-    int ejeX = 60;
-    int ejeY = 200;
-
+    /**
+     * Genera los botones de la A a la Z y los coloca en el panel.
+     */
     private void generarLetras() {
-
         String letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        panelBotones.setHgap(10);
+        panelBotones.setVgap(10);
+        panelBotones.setPrefColumns(7);
+        panelBotones.setAlignment(Pos.CENTER);
 
         for (char i : letras.toCharArray()) {
-
             Button boton = new Button("" + i);
-            boton.setLayoutX(ejeX);
-            boton.setLayoutY(ejeY);
             boton.setFocusTraversable(false);
-
             boton.setOnAction(acciones -> pulsarBoton(boton.getText(), boton));
-
-            ejeX += 40;
-            if (ejeX > 360) {
-                ejeX = 60;
-                ejeY += 30;
-            }
-
-            panelDerecho.getChildren().add(boton);
+            panelBotones.getChildren().add(boton);
         }
-
     }
 
+    /**
+     * Método que se ejecuta al pulsar un botón/letra.
+     *
+     * @param c     Letra pulsada.
+     * @param boton Botón correspondiente (se desactiva tras usarse).
+     */
     private void pulsarBoton(String c, Button boton) {
         boton.setDisable(true);
         boolean acertada = true;
         letrasPulsadas.add(c.charAt(0));
-        if (palabraAdivinar.contains(c)) {
 
+        if (palabraAdivinar.contains(c)) {
             String formaSecreto = "";
             for (int i = 0; i < palabraAdivinar.length(); i++) {
                 if (letrasPulsadas.contains(palabraAdivinar.charAt(i))) {
-                    formaSecreto = formaSecreto + palabraAdivinar.charAt(i) + " ";
+                    formaSecreto += palabraAdivinar.charAt(i) + " ";
                 } else {
-
                     acertada = false;
                     formaSecreto += "_ ";
                 }
             }
             palabra.setText(formaSecreto.trim());
         } else {
-
             fallos++;
             acertada = false;
-
-            imagen.setImage(
-                    new Image(controladorAhorcado.class
-                            .getResourceAsStream("/project/ahorcado/Hangman-" + fallos + ".png")));
+            imagen.setImage(new Image(controladorAhorcado.class
+                    .getResourceAsStream("/project/ahorcado/Hangman-" + fallos + ".png")));
         }
 
         if (acertada) {
-            Alert alertaGanado = new Alert(AlertType.INFORMATION);
-            alertaGanado.setTitle("La partida ha acabado");
-            alertaGanado.setContentText("Has ganado");
-            alertaGanado.setHeaderText(null);
-            alertaGanado.showAndWait();
+            alertaInformacion("La partida ha acabado", null, "Has ganado", "/project/ahorcado/has_ganado.png");
             alertaVolverAJugar();
         }
+
         if (fallos == MAX_FALLOS) {
-            Alert alertaPerdido = new Alert(AlertType.INFORMATION);
-            alertaPerdido.setTitle("La partida ha acabado");
-            alertaPerdido.setContentText("Has perdido");
-            alertaPerdido.setHeaderText(null);
-            alertaPerdido.showAndWait();
+            alertaInformacion("La partida ha acabado", null, "Has perdido",
+                    "/project/ahorcado/Hangman-6.png");
             alertaVolverAJugar();
         }
     }
 
+    /**
+     * Codifica la palabra a adivinar en formato "_ _ _" para mostrar al jugador.
+     */
     private void codificarPalabra() {
-
         String palabraAdivinarCodificada = "";
         for (int i = 0; i < palabraAdivinar.length(); i++) {
             palabraAdivinarCodificada += "_ ";
         }
-
         palabra.setText(palabraAdivinarCodificada);
     }
 
+    /**
+     * Reinicia el juego completamente, eligiendo nueva palabra y limpiando estado.
+     */
     private void reiniciarJuego() {
         fallos = 0;
         letrasPulsadas.clear();
-        ejeX = 60;
-        ejeY = 200;
-        panelDerecho.getChildren().removeIf(s -> s instanceof Button);
+        panelBotones.getChildren().clear();
         elegirPalabraRandom();
         codificarPalabra();
         imagen.setImage(new Image(
                 controladorAhorcado.class.getResourceAsStream("/project/ahorcado/Hangman-0.png")));
         generarLetras();
-
     }
 
+    /**
+     * Muestra una alerta de confirmación preguntando si el jugador quiere jugar de
+     * nuevo.
+     * Si acepta, reinicia el juego. Si no, cierra la aplicación.
+     */
     private void alertaVolverAJugar() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("¿Quieres jugar otra?");
-        alert.setHeaderText("Partida nueva");
+        alert.setTitle("New Game");
+        alert.setHeaderText("¿Deseas jugar otra partida?");
+        alert.setContentText("Dale a aceptar para empezar de nuevo");
+
+        Image imagen = new Image(controladorAhorcado.class.getResourceAsStream("/project/ahorcado/partida_nueva.png"));
+        ImageView vista = new ImageView(imagen);
+        vista.setFitWidth(150);
+        vista.setFitHeight(150);
+        alert.setGraphic(vista);
 
         Optional<ButtonType> resultado = alert.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
@@ -165,9 +180,36 @@ public class controladorAhorcado {
         } else {
             System.exit(0);
         }
-
     }
 
+    /**
+     * Muestra una alerta informativa con imagen personalizada.
+     *
+     * @param title      Título de la alerta.
+     * @param header     Texto del encabezado (puede ser null).
+     * @param context    Texto del contenido principal.
+     * @param imagenPath Ruta de la imagen a mostrar.
+     */
+    private void alertaInformacion(String title, String header, String context, String imagenPath) {
+        Alert alerta = new Alert(AlertType.INFORMATION);
+        alerta.getDialogPane().setPrefSize(100, 80);
+        alerta.setTitle(title);
+        alerta.setHeaderText(header);
+        alerta.setContentText(context);
+
+        Image imagen = new Image(controladorAhorcado.class.getResourceAsStream(imagenPath));
+        ImageView vista = new ImageView(imagen);
+        vista.setFitWidth(150);
+        vista.setFitHeight(150);
+        alerta.setGraphic(vista);
+
+        alerta.showAndWait();
+    }
+
+    /**
+     * Elige una palabra aleatoria del archivo palabras.txt.
+     * Si ocurre un error al leer el archivo, se imprime en consola.
+     */
     private void elegirPalabraRandom() {
         try {
             Path path = Paths.get(controladorAhorcado.class

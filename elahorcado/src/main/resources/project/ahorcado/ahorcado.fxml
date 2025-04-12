@@ -1,29 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane fx:id="panel" dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ahorcado.controladorAhorcado">
-  <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="343.0" style="-fx-background-color: #E3FDFD;">
+<BorderPane fx:id="borderPanel" prefHeight="563.0" prefWidth="545.0" style="-fx-background-color: EEF1FF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ahorcado.controladorAhorcado">
+   <bottom>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imagen" fitHeight="191.0" fitWidth="136.0" layoutX="20.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
-         </children></AnchorPane>
-    <AnchorPane fx:id="panelDerecho" minHeight="0.0" minWidth="0.0" prefHeight="389.0" prefWidth="272.0" style="-fx-background-color: #E3FDFD;">
-         <children>
-            <Label fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="82.0" prefHeight="27.0" prefWidth="151.0" text="Juego del ahorcado">
-               <font>
-                  <Font name="Arial Black" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="palabra" alignment="CENTER" focusTraversable="false" layoutX="32.0" layoutY="341.0" prefHeight="43.0" prefWidth="327.0" text="Palabra">
+            <Label fx:id="palabra" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="127.0" prefWidth="440.0" style="-fx-background-color: EEF1FF;" text="Palabra">
                <font>
                   <Font name="Arial Black" size="29.0" />
-               </font></Label>
-            <ImageView fx:id="imagenJuego" fitHeight="138.0" fitWidth="122.0" layoutX="45.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
-         </children></AnchorPane>
-  </items>
-</SplitPane>
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imagenJuego" fitHeight="138.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="223.0" text="Juego del ahorcado">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <HBox prefHeight="298.0" prefWidth="245.0" style="-fx-background-color: B1B2FF;" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+            <StackPane HBox.hgrow="SOMETIMES">
+               <children>
+                  <ImageView fx:id="imagen" fitHeight="298.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true" translateX="1.5" translateY="1.5">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <TilePane fx:id="panelBotones" prefHeight="298.0" prefWidth="287.0" HBox.hgrow="SOMETIMES" />
+         </children>
+      </HBox>
+   </center>
+   <left>
+      <Pane prefHeight="298.0" prefWidth="60.0" style="-fx-background-color: D2DAFF;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Pane prefHeight="298.0" prefWidth="63.0" style="-fx-background-color: D2DAFF;" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

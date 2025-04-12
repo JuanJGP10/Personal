@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,17 +23,21 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("ahorcado"), 640, 480);
+        scene = new Scene(loadFXML("ahorcado"), 600, 550);
         stage.setScene(scene);
         stage.setTitle("El ahorcado - Juan");
-        stage.setMinHeight(500);
-        stage.setMinWidth(500);
+        stage.setMinHeight(600);
+        stage.setMinWidth(450);
         stage.setOnCloseRequest(ventana -> {
             Alert alertaCierre = new Alert(AlertType.CONFIRMATION);
             alertaCierre.setTitle("Exit");
             alertaCierre.setHeaderText("Intentando salir. Se perderá el progreso");
             alertaCierre.setContentText("Quieres salir del juego?");
-
+            Image imagen = new Image(controladorAhorcado.class.getResourceAsStream("/project/ahorcado/adios.png"));
+            ImageView vista = new ImageView(imagen);
+            vista.setFitWidth(150);
+            vista.setFitHeight(150);
+            alertaCierre.setGraphic(vista);
             Optional<ButtonType> resultado = alertaCierre.showAndWait();
             if (resultado.isPresent() && resultado.get() != ButtonType.OK) {
                 ventana.consume();
