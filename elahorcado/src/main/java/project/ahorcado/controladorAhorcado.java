@@ -83,8 +83,8 @@ public class controladorAhorcado {
         panelBotones.setPrefColumns(7);
         panelBotones.setAlignment(Pos.CENTER);
 
-        for (char i : letras.toCharArray()) {
-            Button boton = new Button("" + i);
+        for (int i = 0; i < letras.length(); i++) {
+            Button boton = new Button("" + letras.charAt(i));
             boton.setFocusTraversable(false);
             boton.setOnAction(acciones -> pulsarBoton(boton.getText(), boton));
             panelBotones.getChildren().add(boton);
