@@ -1,0 +1,5 @@
+El ejercicio lo he enfocado de manera que se juegue del punto de vista de las blancas.
+Por lo que los peones blancos se moveran hacia arriba y los negros hacia abajo.
+Esto lo he hecho debido a que no se si debo implementar dicha mecanica.
+
+Tambien he adjuntado el archivo de pruebas que he usado para comprobar que me funciona bien el metodo mover en peon y torre

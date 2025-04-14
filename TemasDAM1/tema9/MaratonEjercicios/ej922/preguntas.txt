@@ -1,0 +1,21 @@
+a) Prueba a crear instancias de hexágonos y pentágonos sobre variables de tipo PoligonoRegular y comprueba mediante alguna calculadora online que calcula correctamente su área y perímetro.
+-------
+b) ¿Por qué PoligonoRegular es abstracta?
+Porque es la plantilla sobre la q se van a crear el resto de figuras 
+c) ¿El método área() podría ser no abstracto?
+Se podria pero no estariamos usando la herencia.
+d) ¿Es posible crear una clase hija de PoligonoRegular sin desarrollar el método área() ?
+No porque es abstracto, por lo que esta obligado a sobrescribirlo
+e) ¿Puedo crear instancias de PoligonoRegular ?
+No porque es una clase abstracta, por lo que no se puede instanciar
+f) ¿Por qué el método perímetro() no es abstracto si no se calcula igual para cada tipo de polígono regular? (pentágono es lado por 5, hexágono es lado por 6, etc.)
+No es abstarcto porque para todo este tipo de figuras se calcula el perimetro igual, entonces el metodo es igual para todas las clases q hereden de la clase base y no haria falta sobrescribirlo
+g) ¿El siguiente código es correcto? Explica por qué funciona.
+Funciona debido al polimorfismo, las clases hijas tambien tienen la forma de la clase padre entonces tambien se le podria llamar como si fuera la clase padre
+ArrayList <PoligonoRegular> listaPoligonos = new ArrayList <>(); 
+
+for (PoligonoRegular p : listaPoligonos)
+System.out.println(p.area());
+
+h) Si no existiesen las clases abstractas y el método área() lo definiésemos en las clases hijas, ¿Funcionaría el código anterior? ¿Por qué?
+No porque tendrias que desarrollarlo
