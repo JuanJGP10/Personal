@@ -1,11 +1,16 @@
 package project.ahorcado;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
@@ -212,16 +217,31 @@ public class controladorAhorcado {
      */
     private void elegirPalabraRandom() {
         try {
-            Path path = Paths.get(controladorAhorcado.class
-                    .getResource("/project/ahorcado/palabras.txt").toURI());
+            URI uri = controladorAhorcado.class
+                    .getResource("/project/ahorcado/palabras.txt").toURI();
+            Path path;
+
+            if ("jar".equals(uri.getScheme())) {
+                FileSystem fileSystem;
+                try {
+                    fileSystem = FileSystems.getFileSystem(uri);
+                } catch (FileSystemNotFoundException e) {
+                    fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
+                }
+                path = fileSystem.getPath("/project/ahorcado/palabras.txt");
+            } else {
+                path = Paths.get(uri);
+            }
 
             List<String> listaPalabras = Files.readAllLines(path);
-            palabraAdivinar = listaPalabras.get(ThreadLocalRandom.current().nextInt(0, listaPalabras.size() + 1))
+            palabraAdivinar = listaPalabras
+                    .get(ThreadLocalRandom.current().nextInt(listaPalabras.size()))
                     .toUpperCase();
+
+            System.out.println(palabraAdivinar);
         } catch (URISyntaxException | IOException e) {
-            System.out.println("Ruta no existe");
+            System.out.println("Ruta no existe o error leyendo archivo: " + e.getMessage());
         }
-        System.out.println(palabraAdivinar);
     }
 
 }
