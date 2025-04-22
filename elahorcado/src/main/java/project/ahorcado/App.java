@@ -23,11 +23,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("ahorcado"), 600, 550);
+        scene = new Scene(loadFXML("ahorcado"), 500, 850);
         stage.setScene(scene);
         stage.setTitle("El ahorcado - Juan");
-        stage.setMinHeight(600);
-        stage.setMinWidth(450);
+        stage.setMinHeight(800);
+        stage.setMinWidth(425);
         stage.setOnCloseRequest(ventana -> {
             Alert alertaCierre = new Alert(AlertType.CONFIRMATION);
             alertaCierre.setTitle("Exit");

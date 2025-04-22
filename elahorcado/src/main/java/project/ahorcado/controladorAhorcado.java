@@ -85,13 +85,15 @@ public class controladorAhorcado {
         String letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
         panelBotones.setHgap(10);
         panelBotones.setVgap(10);
-        panelBotones.setPrefColumns(7);
+        panelBotones.setPrefColumns(5);
         panelBotones.setAlignment(Pos.CENTER);
 
         for (int i = 0; i < letras.length(); i++) {
             Button boton = new Button("" + letras.charAt(i));
             boton.setFocusTraversable(false);
+            boton.setMinSize(30, 30);
             boton.setOnAction(acciones -> pulsarBoton(boton.getText(), boton));
+            boton.getStyleClass().add("boton-letra");
             panelBotones.getChildren().add(boton);
         }
     }
@@ -103,6 +105,8 @@ public class controladorAhorcado {
      * @param boton Botón correspondiente (se desactiva tras usarse).
      */
     private void pulsarBoton(String c, Button boton) {
+        boton.getStyleClass().remove("boton-letra");
+        boton.getStyleClass().add("boton-pulsado");
         boton.setDisable(true);
         boolean acertada = true;
         letrasPulsadas.add(c.charAt(0));

@@ -6,37 +6,36 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPanel" prefHeight="563.0" prefWidth="545.0" style="-fx-background-color: EEF1FF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ahorcado.controladorAhorcado">
+<BorderPane fx:id="borderPanel" prefHeight="563.0" prefWidth="545.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.ahorcado.controladorAhorcado">
    <bottom>
-      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox id="bottom" alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="palabra" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="127.0" prefWidth="440.0" style="-fx-background-color: EEF1FF;" text="Palabra">
+            <Label id="word" fx:id="palabra" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="127.0" prefWidth="440.0" text="Palabra">
                <font>
-                  <Font name="Arial Black" size="29.0" />
+                  <Font name="Arial Black" size="20.0" />
                </font>
             </Label>
          </children>
       </HBox>
    </bottom>
    <top>
-      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox id="top" alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="imagenJuego" fitHeight="138.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="223.0" text="Juego del ahorcado">
+            <Label id="title" fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="223.0" text="Juego del ahorcado">
                <font>
-                  <Font name="Arial Black" size="18.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
          </children>
       </HBox>
    </top>
    <center>
-      <HBox prefHeight="298.0" prefWidth="245.0" style="-fx-background-color: B1B2FF;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" fillHeight="false" styleClass="mid" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
@@ -47,17 +46,17 @@
                      <viewport>
                         <Rectangle2D />
                      </viewport>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
                   </ImageView>
                </children>
             </StackPane>
-            <TilePane fx:id="panelBotones" prefHeight="298.0" prefWidth="287.0" HBox.hgrow="SOMETIMES" />
+            <TilePane id="buttons" fx:id="panelBotones" alignment="CENTER" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="30.0" right="40.0" />
+               </HBox.margin></TilePane>
          </children>
       </HBox>
    </center>
-   <left>
-      <Pane prefHeight="298.0" prefWidth="60.0" style="-fx-background-color: D2DAFF;" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <Pane prefHeight="298.0" prefWidth="63.0" style="-fx-background-color: D2DAFF;" BorderPane.alignment="CENTER" />
-   </right>
 </BorderPane>

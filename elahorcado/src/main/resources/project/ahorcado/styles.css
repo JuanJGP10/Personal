@@ -1,0 +1,77 @@
+
+.mid {
+    -fx-background-color: #393E46;
+}
+
+#bottom {
+    
+    -fx-border-color: black #222831 #222831 #222831;
+    -fx-border-width: 5px;
+    -fx-background-color: #222831;
+ 
+}
+
+#top {
+    -fx-border-color: #222831 #222831 black #222831;
+    -fx-border-width: 5px;
+    -fx-background-color: #222831;
+}
+
+#buttons {
+    -fx-background-color: #00ADB5;
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-border-radius: 20;
+    -fx-background-radius: 27;
+    -fx-padding: 5;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    
+
+}
+
+#word {
+    -fx-text-fill: white;
+    -fx-font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    
+    
+}
+
+#title {
+    -fx-text-fill: white;
+    -fx-font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    
+}
+
+.boton-letra {
+    
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    
+}
+
+.boton-pulsado {
+    -fx-background-color: #00ADB5;
+    -fx-text-fill: #00ADB5;
+    -fx-font-size: 16px;
+    -fx-border-color: #00ADB5;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
