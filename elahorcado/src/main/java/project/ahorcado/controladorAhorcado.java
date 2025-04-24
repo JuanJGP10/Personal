@@ -159,11 +159,7 @@ public class controladorAhorcado {
         fallos = 0;
         letrasPulsadas.clear();
         panelBotones.getChildren().clear();
-        elegirPalabraRandom();
-        codificarPalabra();
-        imagen.setImage(new Image(
-                controladorAhorcado.class.getResourceAsStream("/project/ahorcado/Hangman-0.png")));
-        generarLetras();
+        initialize();
     }
 
     /**
