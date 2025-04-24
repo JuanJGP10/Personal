@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
-
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -26,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 
 /**
  * Controlador principal del juego del Ahorcado en JavaFX.
@@ -76,6 +76,7 @@ public class controladorAhorcado {
         imagenJuego.setImage(new Image(
                 controladorAhorcado.class.getResourceAsStream("/project/ahorcado/ahorcado.png")));
         generarLetras();
+
     }
 
     /**
@@ -95,10 +96,12 @@ public class controladorAhorcado {
             boton.setOnAction(acciones -> pulsarBoton(boton.getText(), boton));
             boton.getStyleClass().add("boton-letra");
             panelBotones.getChildren().add(boton);
+
         }
     }
 
     /**
+     * 
      * Método que se ejecuta al pulsar un botón/letra.
      *
      * @param c     Letra pulsada.
@@ -135,7 +138,7 @@ public class controladorAhorcado {
         }
 
         if (fallos == MAX_FALLOS) {
-            alertaInformacion("La partida ha acabado", null, "Has perdido",
+            alertaInformacion("La partida ha acabado", null, "Has perdido, la palabra era " + palabraAdivinar,
                     "/project/ahorcado/Hangman-6.png");
             alertaVolverAJugar();
         }
@@ -183,7 +186,8 @@ public class controladorAhorcado {
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             reiniciarJuego();
         } else {
-            System.exit(0);
+            // Menos forzoso que un System.exit(0);
+            ((Stage) borderPanel.getScene().getWindow()).close();
         }
     }
 
@@ -195,14 +199,13 @@ public class controladorAhorcado {
      * @param context    Texto del contenido principal.
      * @param imagenPath Ruta de la imagen a mostrar.
      */
-    private void alertaInformacion(String title, String header, String context, String imagenPath) {
+    private void alertaInformacion(String title, String header, String context, String ruta) {
         Alert alerta = new Alert(AlertType.INFORMATION);
         alerta.getDialogPane().setPrefSize(100, 80);
         alerta.setTitle(title);
         alerta.setHeaderText(header);
         alerta.setContentText(context);
-
-        Image imagen = new Image(controladorAhorcado.class.getResourceAsStream(imagenPath));
+        Image imagen = new Image(controladorAhorcado.class.getResourceAsStream(ruta));
         ImageView vista = new ImageView(imagen);
         vista.setFitWidth(150);
         vista.setFitHeight(150);
@@ -213,7 +216,7 @@ public class controladorAhorcado {
 
     /**
      * Elige una palabra aleatoria del archivo palabras.txt.
-     * Si ocurre un error al leer el archivo, se imprime en consola.
+     * Con su correción pertinente para poder abrirse cuando sea un .jar
      */
     private void elegirPalabraRandom() {
         try {
@@ -238,7 +241,6 @@ public class controladorAhorcado {
                     .get(ThreadLocalRandom.current().nextInt(listaPalabras.size()))
                     .toUpperCase();
 
-            System.out.println(palabraAdivinar);
         } catch (URISyntaxException | IOException e) {
             System.out.println("Ruta no existe o error leyendo archivo: " + e.getMessage());
         }
