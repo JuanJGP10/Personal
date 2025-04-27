@@ -238,7 +238,7 @@ public class controladorAhorcado {
 
             List<String> listaPalabras = Files.readAllLines(path);
             palabraAdivinar = listaPalabras
-                    .get(ThreadLocalRandom.current().nextInt(listaPalabras.size()))
+                    .get(ThreadLocalRandom.current().nextInt(0, listaPalabras.size() + 1))
                     .toUpperCase();
 
         } catch (URISyntaxException | IOException e) {
