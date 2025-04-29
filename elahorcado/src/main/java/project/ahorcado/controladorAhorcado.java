@@ -224,7 +224,7 @@ public class controladorAhorcado {
     private void elegirPalabraRandom() {
         try {
             URI uri = controladorAhorcado.class
-                    .getResource("palabras.txt").toURI();
+                    .getResource("/project/ahorcado/palabras.txt").toURI();
             Path path;
 
             if ("jar".equals(uri.getScheme())) {
@@ -234,7 +234,7 @@ public class controladorAhorcado {
                 } catch (FileSystemNotFoundException e) {
                     fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
                 }
-                path = fileSystem.getPath("palabras.txt");
+                path = fileSystem.getPath("/project/ahorcado/palabras.txt");
             } else {
                 path = Paths.get(uri);
             }
