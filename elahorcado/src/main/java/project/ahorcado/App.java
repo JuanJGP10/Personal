@@ -26,14 +26,17 @@ public class App extends Application {
         scene = new Scene(loadFXML("ahorcado"), 500, 850);
         stage.setScene(scene);
         stage.setTitle("El ahorcado - Juan");
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("ahorcadoLogo.png")));
         stage.setMinHeight(800);
         stage.setMinWidth(425);
         stage.setOnCloseRequest(ventana -> {
             Alert alertaCierre = new Alert(AlertType.CONFIRMATION);
+            alertaCierre.getDialogPane().getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+            alertaCierre.getDialogPane().getStyleClass().add("alertas");
             alertaCierre.setTitle("Exit");
             alertaCierre.setHeaderText("Intentando salir. Se perderá el progreso");
             alertaCierre.setContentText("Quieres salir del juego?");
-            Image imagen = new Image(controladorAhorcado.class.getResourceAsStream("/project/ahorcado/adios.png"));
+            Image imagen = new Image(controladorAhorcado.class.getResourceAsStream("adios.png"));
             ImageView vista = new ImageView(imagen);
             vista.setFitWidth(150);
             vista.setFitHeight(150);

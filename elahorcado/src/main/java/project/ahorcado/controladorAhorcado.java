@@ -72,9 +72,9 @@ public class controladorAhorcado {
         elegirPalabraRandom();
         codificarPalabra();
         imagen.setImage(new Image(
-                controladorAhorcado.class.getResourceAsStream("/project/ahorcado/Hangman-0.png")));
+                controladorAhorcado.class.getResourceAsStream("Hangman-0.png")));
         imagenJuego.setImage(new Image(
-                controladorAhorcado.class.getResourceAsStream("/project/ahorcado/ahorcado.png")));
+                controladorAhorcado.class.getResourceAsStream("ahorcado.png")));
         generarLetras();
 
     }
@@ -129,17 +129,17 @@ public class controladorAhorcado {
             fallos++;
             acertada = false;
             imagen.setImage(new Image(controladorAhorcado.class
-                    .getResourceAsStream("/project/ahorcado/Hangman-" + fallos + ".png")));
+                    .getResourceAsStream("Hangman-" + fallos + ".png")));
         }
 
         if (acertada) {
-            alertaInformacion("La partida ha acabado", null, "Has ganado", "/project/ahorcado/has_ganado.png");
+            alertaInformacion("La partida ha acabado", null, "Has ganado", "has_ganado.png");
             alertaVolverAJugar();
         }
 
         if (fallos == MAX_FALLOS) {
             alertaInformacion("La partida ha acabado", null, "Has perdido, la palabra era " + palabraAdivinar,
-                    "/project/ahorcado/Hangman-6.png");
+                    "Hangman-6.png");
             alertaVolverAJugar();
         }
     }
@@ -175,8 +175,9 @@ public class controladorAhorcado {
         alert.setTitle("New Game");
         alert.setHeaderText("¿Deseas jugar otra partida?");
         alert.setContentText("Dale a aceptar para empezar de nuevo");
-
-        Image imagen = new Image(controladorAhorcado.class.getResourceAsStream("/project/ahorcado/partida_nueva.png"));
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("alertas");
+        Image imagen = new Image(controladorAhorcado.class.getResourceAsStream("partida_nueva.png"));
         ImageView vista = new ImageView(imagen);
         vista.setFitWidth(150);
         vista.setFitHeight(150);
@@ -202,6 +203,8 @@ public class controladorAhorcado {
     private void alertaInformacion(String title, String header, String context, String ruta) {
         Alert alerta = new Alert(AlertType.INFORMATION);
         alerta.getDialogPane().setPrefWidth(300);
+        alerta.getDialogPane().getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        alerta.getDialogPane().getStyleClass().add("alertas");
         alerta.setTitle(title);
         alerta.setHeaderText(header);
         alerta.setContentText(context);
@@ -221,7 +224,7 @@ public class controladorAhorcado {
     private void elegirPalabraRandom() {
         try {
             URI uri = controladorAhorcado.class
-                    .getResource("/project/ahorcado/palabras.txt").toURI();
+                    .getResource("palabras.txt").toURI();
             Path path;
 
             if ("jar".equals(uri.getScheme())) {
@@ -231,7 +234,7 @@ public class controladorAhorcado {
                 } catch (FileSystemNotFoundException e) {
                     fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
                 }
-                path = fileSystem.getPath("/project/ahorcado/palabras.txt");
+                path = fileSystem.getPath("palabras.txt");
             } else {
                 path = Paths.get(uri);
             }

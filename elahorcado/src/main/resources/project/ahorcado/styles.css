@@ -75,3 +75,31 @@
     -fx-border-insets: 0;
 }
 
+.alertas {
+    -fx-text-fill: white;
+    -fx-background-color: #222831;
+}
+
+.dialog-pane .content.label {
+    -fx-text-fill: white;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #222831;
+}
+
+.dialog-pane .header-panel .label {
+    
+    -fx-text-fill: white;
+}
+
+.dialog-pane .context-panel {
+    -fx-background-color: #222831;
+    -fx-text-fill: white;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+

@@ -26,7 +26,7 @@
       <HBox id="top" alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="imagenJuego" fitHeight="138.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true" />
-            <Label id="title" fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="223.0" text="Juego del ahorcado">
+            <Label id="title" fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="223.0" text="DAM. IES Thiar">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
