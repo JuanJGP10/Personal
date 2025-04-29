@@ -1,7 +1,5 @@
 package ejercicios;
 
-import java.util.ArrayList;
-
 public class DuplicateEncoder {
 
     /*

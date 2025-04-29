@@ -1,7 +1,5 @@
 package ejercicios;
 
-import java.util.TreeSet;
-
 public class TwoToOne {
     /*
      * Take 2 strings s1 and s2 including only letters from a to z. Return a new

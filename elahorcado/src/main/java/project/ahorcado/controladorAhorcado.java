@@ -201,7 +201,7 @@ public class controladorAhorcado {
      */
     private void alertaInformacion(String title, String header, String context, String ruta) {
         Alert alerta = new Alert(AlertType.INFORMATION);
-        alerta.getDialogPane().setPrefSize(100, 80);
+        alerta.getDialogPane().setPrefWidth(300);
         alerta.setTitle(title);
         alerta.setHeaderText(header);
         alerta.setContentText(context);
