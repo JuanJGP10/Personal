@@ -61,7 +61,7 @@ public class EditorPersonaControlador implements Initializable {
             persona.setDireccion(direccionTextField.getText());
             persona.setCodigoPostal(Integer.parseInt(codigoPostalTextField.getText()));
             persona.setCiudad(ciudadTextField.getText());
-            persona.setFechaNacimiento(null); // Aquí faltaría convertir el texto a fecha
+            persona.setFechaNacimiento(UtilidadDeFechas.convertir(fechaNacimientoTextField.getText()));
             guardarClicked = true;
             escenarioEdicion.close();
         }

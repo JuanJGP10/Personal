@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.bdoo.persona.EditorPersonaControlador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../darkTheme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.bdoo.persona.EditorPersonaControlador">
    <children>
       <GridPane layoutX="11.0" layoutY="11.0" prefHeight="221.0" prefWidth="577.0">
         <columnConstraints>
@@ -24,12 +24,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="212.0" text="Nombre" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="185.0" text="Apellidos" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="155.0" text="Direccion" GridPane.rowIndex="2" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="169.0" text="Ciudad" GridPane.rowIndex="3" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="182.0" text="Codigo postal" GridPane.rowIndex="4" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="195.0" text="Fecha de nacimiento" GridPane.rowIndex="5" />
+            <Label alignment="TOP_LEFT" prefHeight="17.0" prefWidth="212.0" text="Nombre" />
+            <Label alignment="TOP_LEFT" prefHeight="17.0" prefWidth="185.0" text="Apellidos" GridPane.rowIndex="1" />
+            <Label alignment="TOP_LEFT" prefHeight="17.0" prefWidth="155.0" text="Direccion" GridPane.rowIndex="2" />
+            <Label alignment="TOP_LEFT" prefHeight="17.0" prefWidth="169.0" text="Ciudad" GridPane.rowIndex="3" />
+            <Label alignment="TOP_LEFT" prefHeight="17.0" prefWidth="182.0" text="Codigo postal" GridPane.rowIndex="4" />
+            <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="195.0" text="Fecha de nacimiento" GridPane.rowIndex="5" />
             <TextField fx:id="nombreTextField" GridPane.columnIndex="1" />
             <TextField fx:id="apellidosTextField" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="direccionTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -38,7 +38,7 @@
             <TextField fx:id="fechaNacimientoTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Button layoutX="458.0" layoutY="361.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
-      <Button layoutX="524.0" layoutY="361.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+      <Button defaultButton="true" layoutX="385.0" layoutY="353.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
+      <Button cancelButton="true" layoutX="482.0" layoutY="353.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
    </children>
 </AnchorPane>

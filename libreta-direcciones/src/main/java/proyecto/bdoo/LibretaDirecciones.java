@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -54,6 +55,9 @@ public class LibretaDirecciones extends Application {
 
         // Establecemos el título de la ventana
         this.escenarioPrincipal.setTitle("Libreta de direcciones");
+
+        // Icono de aplicacion
+        this.escenarioPrincipal.getIcons().add(new Image(LibretaDirecciones.class.getResourceAsStream("icon.png")));
 
         // Inicializamos el contenedor principal
         initContenedorPrincipal();
