@@ -3,5 +3,10 @@ module proyecto.bdoo {
     requires javafx.fxml;
 
     opens proyecto.bdoo to javafx.fxml;
+
     exports proyecto.bdoo;
+
+    opens proyecto.bdoo.persona to javafx.fxml;
+
+    exports proyecto.bdoo.persona;
 }
