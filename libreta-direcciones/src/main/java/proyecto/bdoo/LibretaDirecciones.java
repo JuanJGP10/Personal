@@ -1,6 +1,7 @@
 package proyecto.bdoo;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -9,7 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import proyecto.bdoo.persona.EditorPersonaControlador;
 import proyecto.bdoo.persona.Persona;
 
 public class LibretaDirecciones extends Application {
@@ -85,7 +88,7 @@ public class LibretaDirecciones extends Application {
     public void mostrarVistaPersona() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(LibretaDirecciones.class.getResource("persona/vistaPersona.fxml"));
+            loader.setLocation(LibretaDirecciones.class.getResource("vistaPersona.fxml"));
             AnchorPane personOverview = loader.load();
 
             contenedorPrincipal.setCenter(personOverview);
@@ -96,6 +99,42 @@ public class LibretaDirecciones extends Application {
             System.err.println("Error al cargar vistaPersona.fxml:");
             e.printStackTrace();
         }
+    }
+
+    // Vista editarPersona
+    public boolean muestraEditarPersona(Persona persona) {
+        // Cargo la vista persona a partir de VistaPersona.fxml
+        AnchorPane editarPersona = null;
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            URL location = LibretaDirecciones.class.getResource("persona/editarPersona.fxml");
+            loader.setLocation(location);
+            editarPersona = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            // ex.printStackTrace();
+            System.err.println("---------------------------------------");
+            return false;
+        }
+
+        // Creo el escenario de edición (con modal) y establezco la escena
+        Stage escenarioEdicion = new Stage();
+        escenarioEdicion.setTitle("Editar Persona");
+        escenarioEdicion.initModality(Modality.WINDOW_MODAL);
+        escenarioEdicion.initOwner(escenarioPrincipal);
+        Scene escena = new Scene(editarPersona);
+        escenarioEdicion.setScene(escena);
+
+        // Asigno el escenario de edición y la persona seleccionada al controlador
+        EditorPersonaControlador controlador = loader.getController();
+        controlador.setEscenarioEdicion(escenarioEdicion);
+        controlador.setPersona(persona);
+
+        // Muestro el diálogo hasta que el usuario lo cierre
+        escenarioEdicion.showAndWait();
+
+        // devuelvo el botón pulsado
+        return controlador.isGuardarClicked();
     }
 
     /**

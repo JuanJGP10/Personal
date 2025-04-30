@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" styleClass="background-color" stylesheets="@vistaPersona.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.bdoo.VistaPersonaControlador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.bdoo.VistaPersonaControlador">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="20.0" layoutY="49.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="personaTabla" layoutX="-39.0" layoutY="6.0" prefHeight="298.0" prefWidth="175.0" stylesheets="@vistaPersona.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="personaTabla" layoutX="-39.0" layoutY="6.0" prefHeight="298.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="nombreColumna" minWidth="20.0" prefWidth="91.0" text="Nombre" />
                       <TableColumn fx:id="apellidosColumna" prefWidth="82.0" text="Apellidos" />
@@ -83,9 +83,9 @@
                      </children>
                   </GridPane>
                   <Label id="detalles" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="22.0" layoutY="2.0" prefHeight="25.0" prefWidth="340.0" text="Detalles" />
-                  <Button layoutX="295.0" layoutY="259.0" mnemonicParsing="false" text="Editar" />
+                  <Button layoutX="295.0" layoutY="259.0" mnemonicParsing="false" onAction="#editarPersona" text="Editar" />
                   <Button layoutX="353.0" layoutY="259.0" mnemonicParsing="false" onAction="#borrarPersona" text="Borrar" />
-                  <Button layoutX="237.0" layoutY="259.0" mnemonicParsing="false" text="Nuevo" />
+                  <Button layoutX="237.0" layoutY="259.0" mnemonicParsing="false" onAction="#crearPersona" text="Nuevo" />
                </children>
             </AnchorPane>
         </items>

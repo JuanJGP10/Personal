@@ -1,9 +1,4 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
-    "java.debug.settings.onBuildFailureProceed": true,
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#4E1C31",
-        "titleBar.activeBackground": "#6D2745",
-        "titleBar.activeForeground": "#FEFCFD"
-    }
+    "java.debug.settings.onBuildFailureProceed": true
 }

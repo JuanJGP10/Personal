@@ -1,7 +1,7 @@
 package proyecto.bdoo;
 
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -13,10 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import proyecto.bdoo.persona.Persona;
 import proyecto.bdoo.util.UtilidadDeFechas;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class VistaPersonaControlador implements Initializable {
 
@@ -126,6 +122,39 @@ public class VistaPersonaControlador implements Initializable {
             alert.showAndWait();
         }
 
+    }
+
+    // Muestro el diálogo editar persona cuando el usuario hace clic en el botón de
+    // Crear
+
+    @FXML
+    private void crearPersona() {
+        Persona temporal = new Persona();
+        boolean guardarClicked = libretaDirecciones.muestraEditarPersona(temporal);
+        if (guardarClicked) {
+            libretaDirecciones.getDatosPersona().add(temporal);
+        }
+    }
+
+    // Muestro el diálogo editar persona cuando el usuario hace clic en el botón de
+    // Editar
+
+    @FXML
+    private void editarPersona() {
+        Persona seleccionada = personaTabla.getSelectionModel().getSelectedItem();
+        if (seleccionada != null) {
+            boolean guardarClicked = libretaDirecciones.muestraEditarPersona(seleccionada);
+            if (guardarClicked) {
+                mostrarDetallesPersona(seleccionada);
+            }
+        } else {
+            // Muestro alerta
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Alerta");
+            alerta.setHeaderText("Persona no seleccionada");
+            alerta.setContentText("Por favor, selecciona una persona");
+            alerta.showAndWait();
+        }
     }
 
 }
