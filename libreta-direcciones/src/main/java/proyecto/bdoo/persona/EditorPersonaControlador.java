@@ -40,12 +40,12 @@ public class EditorPersonaControlador implements Initializable {
 
     public void setPersona(Persona persona) {
         this.persona = persona;
-        nombreTextField.setText(persona.getNombre());
-        apellidosTextField.setText(persona.getApellidos());
-        direccionTextField.setText(persona.getDireccion());
-        codigoPostalTextField.setText(Integer.toString(persona.getCodigoPostal()));
-        ciudadTextField.setText(persona.getCiudad());
-        fechaNacimientoTextField.setText(UtilidadDeFechas.formato(persona.getFechaNacimiento()));
+        nombreTextField.setText(persona.getNombreProperty().get());
+        apellidosTextField.setText(persona.getApellidosProperty().get());
+        direccionTextField.setText(persona.getDireccionProperty().get());
+        codigoPostalTextField.setText(persona.getCodigoPostalProperty().toString());
+        ciudadTextField.setText(persona.getCiudadProperty().get());
+        fechaNacimientoTextField.setText(UtilidadDeFechas.formato(persona.getFechaNacimientoProperty().get()));
         fechaNacimientoTextField.setPromptText("dd/mm/yyyy");
     }
 
@@ -56,12 +56,12 @@ public class EditorPersonaControlador implements Initializable {
     @FXML
     private void guardar() {
         if (datosValidos()) {
-            persona.setNombre(nombreTextField.getText());
-            persona.setApellidos(apellidosTextField.getText());
-            persona.setDireccion(direccionTextField.getText());
-            persona.setCodigoPostal(Integer.parseInt(codigoPostalTextField.getText()));
-            persona.setCiudad(ciudadTextField.getText());
-            persona.setFechaNacimiento(UtilidadDeFechas.convertir(fechaNacimientoTextField.getText()));
+            persona.setNombreProperty(nombreTextField.getText());
+            persona.setApellidosProperty(apellidosTextField.getText());
+            persona.setDireccionProperty(direccionTextField.getText());
+            persona.setCodigoPostalProperty(Integer.parseInt(codigoPostalTextField.getText()));
+            persona.setCiudadProperty(ciudadTextField.getText());
+            persona.setFechaNacimientoProperty(UtilidadDeFechas.convertir(fechaNacimientoTextField.getText()));
             guardarClicked = true;
             escenarioEdicion.close();
         }

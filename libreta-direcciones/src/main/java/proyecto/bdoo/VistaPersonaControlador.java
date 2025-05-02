@@ -58,8 +58,8 @@ public class VistaPersonaControlador implements Initializable {
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        nombreColumna.setCellValueFactory(cellData -> cellData.getValue().nombreProperty());
-        apellidosColumna.setCellValueFactory(cellData -> cellData.getValue().apellidosProperty());
+        nombreColumna.setCellValueFactory(cellData -> cellData.getValue().getNombreProperty());
+        apellidosColumna.setCellValueFactory(cellData -> cellData.getValue().getApellidosProperty());
 
         // Borramos los textos de los datos de una persona
         mostrarDetallesPersona(null);
@@ -83,6 +83,7 @@ public class VistaPersonaControlador implements Initializable {
     }
 
     /**
+     * xzx
      * Rellena todos los textos para mostrar los detalles de una persona
      * Si la persona es null, los textos se borran
      *
@@ -91,12 +92,12 @@ public class VistaPersonaControlador implements Initializable {
     private void mostrarDetallesPersona(Persona persona) {
         if (persona != null) {
             // Fill the labels with info from the person object.
-            nombreEtiqueta.setText(persona.getNombre());
-            apellidosEtiqueta.setText(persona.getApellidos());
-            direccionEtiqueta.setText(persona.getDireccion());
-            codigoPostalEtiqueta.setText(Integer.toString(persona.getCodigoPostal()));
-            ciudadEtiqueta.setText(persona.getCiudad());
-            fechaNacimientoEtiqueta.setText(UtilidadDeFechas.formato(persona.getFechaNacimiento()));
+            nombreEtiqueta.setText(persona.getNombreProperty().get());
+            apellidosEtiqueta.setText(persona.getApellidosProperty().get());
+            direccionEtiqueta.setText(persona.getDireccionProperty().get());
+            codigoPostalEtiqueta.setText(persona.getCodigoPostalProperty().toString());
+            ciudadEtiqueta.setText(persona.getCiudadProperty().get());
+            fechaNacimientoEtiqueta.setText(UtilidadDeFechas.formato(persona.getFechaNacimientoProperty().get()));
 
         } else {
             // Person is null, remove all the text.

@@ -2,6 +2,7 @@ package proyecto.bdoo;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -28,23 +29,22 @@ public class LibretaDirecciones extends Application {
     private ObservableList<Persona> datosPersona = FXCollections.observableArrayList();
 
     /**
-     * Constructor: inicializa la libreta con datos de ejemplo.
-     */
-    public LibretaDirecciones() {
-        datosPersona.add(new Persona("Aitor", "Tilla"));
-        datosPersona.add(new Persona("Paco", "Jones"));
-        datosPersona.add(new Persona("Victor", "Tazo"));
-        datosPersona.add(new Persona("Aquiles", "Castro"));
-        datosPersona.add(new Persona("Elton", "Tito"));
-        datosPersona.add(new Persona("Aitor", "Menta"));
-    }
-
-    /**
      * Devuelve la lista observable de personas.
      * 
      * @return lista de personas
      */
     public ObservableList<Persona> getDatosPersona() {
+
+        // Creamos el gestor
+        SistemaGestionPersonas sp = new SistemaGestionPersonas();
+
+        // Cargamos las personas de la base de datos conviertiendolos a Persona
+        List<Persona> listaPDB = sp.obtenerTodasLasPersonas();
+
+        for (int i = 0; i < listaPDB.size(); i++) {
+            Persona p = new Persona(listaPDB.get(i).getNombre(), listaPDB.get(i).getApellidos());
+            datosPersona.add(p);
+        }
         return datosPersona;
     }
 
