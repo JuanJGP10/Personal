@@ -79,6 +79,10 @@ public class LibretaDirecciones extends Application {
             // Creamos la escena con el contenedor y la asignamos al escenario principal
             Scene scene = new Scene(contenedorPrincipal);
             escenarioPrincipal.setScene(scene);
+            escenarioPrincipal.setHeight(475);
+            escenarioPrincipal.setWidth(815);
+            escenarioPrincipal.setMinWidth(815);
+            escenarioPrincipal.setMinHeight(475);
             escenarioPrincipal.show();
         } catch (IOException e) {
             e.printStackTrace();
