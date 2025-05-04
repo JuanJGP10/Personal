@@ -11,7 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class EditorPersonaControlador implements Initializable {
+public class NuevaPersonaControlador implements Initializable {
 
     @FXML
     private TextField nombreTextField;
@@ -67,8 +67,7 @@ public class EditorPersonaControlador implements Initializable {
             escenarioEdicion.close();
 
             SistemaGestionPersonas sp = new SistemaGestionPersonas();
-            sp.actualizarPersona(persona.getId(), nombreTextField.getText(), apellidosTextField.getText(),
-                    direccionTextField.getText(),
+            sp.crearPersona(nombreTextField.getText(), apellidosTextField.getText(), direccionTextField.getText(),
                     Integer.parseInt(codigoPostalTextField.getText()), ciudadTextField.getText(),
                     UtilidadDeFechas.convertir(fechaNacimientoTextField.getText()));
         }

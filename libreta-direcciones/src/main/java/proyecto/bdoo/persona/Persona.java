@@ -2,6 +2,8 @@ package proyecto.bdoo.persona;
 
 import java.time.LocalDate;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 @Entity
+@Access(AccessType.FIELD)
 public class Persona {
 
     @Id
@@ -29,17 +32,17 @@ public class Persona {
     private LocalDate fechaNacimiento;
 
     @Transient
-    private final StringProperty nombreProperty;
+    private StringProperty nombreProperty;
     @Transient
-    private final StringProperty apellidosProperty;
+    private StringProperty apellidosProperty;
     @Transient
-    private final StringProperty direccionProperty;
+    private StringProperty direccionProperty;
     @Transient
-    private final IntegerProperty codigoPostalProperty;
+    private IntegerProperty codigoPostalProperty;
     @Transient
-    private final StringProperty ciudadProperty;
+    private StringProperty ciudadProperty;
     @Transient
-    private final ObjectProperty<LocalDate> fechaNacimientoProperty;
+    private ObjectProperty<LocalDate> fechaNacimientoProperty;
 
     /**
      * Constructor por defecto.
@@ -65,6 +68,18 @@ public class Persona {
         this.fechaNacimientoProperty = new SimpleObjectProperty<>(LocalDate.of(2002, 2, 20));
     }
 
+    public Persona(String nombre, String apellidos, String direccion, int codigoPostal, String ciudad,
+            LocalDate fechaNacimiento) {
+        this.nombreProperty = new SimpleStringProperty(nombre);
+        this.apellidosProperty = new SimpleStringProperty(apellidos);
+
+        // Datos de prueba por defecto
+        this.direccionProperty = new SimpleStringProperty(direccion);
+        this.codigoPostalProperty = new SimpleIntegerProperty(codigoPostal);
+        this.ciudadProperty = new SimpleStringProperty(ciudad);
+        this.fechaNacimientoProperty = new SimpleObjectProperty<>(fechaNacimiento);
+    }
+
     public long getId() {
         return id;
     }
@@ -81,12 +96,28 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    public StringProperty getNombreProperty() {
+        return nombreProperty;
+    }
+
+    public void setNombreProperty(String nombre) {
+        this.nombreProperty.set(nombre);
+    }
+
     public String getApellidos() {
         return apellidos;
     }
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public StringProperty getApellidosProperty() {
+        return apellidosProperty;
+    }
+
+    public void setApellidosProperty(String apellidos) {
+        this.apellidosProperty.set(apellidos);
     }
 
     public String getDireccion() {
@@ -97,12 +128,28 @@ public class Persona {
         this.direccion = direccion;
     }
 
+    public StringProperty getDireccionProperty() {
+        return direccionProperty;
+    }
+
+    public void setDireccionProperty(String direccion) {
+        this.direccionProperty.set(direccion);
+    }
+
     public int getCodigoPostal() {
         return codigoPostal;
     }
 
     public void setCodigoPostal(int codigoPostal) {
         this.codigoPostal = codigoPostal;
+    }
+
+    public IntegerProperty getCodigoPostalProperty() {
+        return codigoPostalProperty;
+    }
+
+    public void setCodigoPostalProperty(int codigoPostal) {
+        this.codigoPostalProperty.set(codigoPostal);
     }
 
     public String getCiudad() {
@@ -113,6 +160,14 @@ public class Persona {
         this.ciudad = ciudad;
     }
 
+    public StringProperty getCiudadProperty() {
+        return ciudadProperty;
+    }
+
+    public void setCiudadProperty(String ciudad) {
+        this.ciudadProperty.set(ciudad);
+    }
+
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -121,53 +176,12 @@ public class Persona {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public StringProperty getNombreProperty() {
-        return nombreProperty;
-    }
-
-    public StringProperty getApellidosProperty() {
-        return apellidosProperty;
-    }
-
-    public StringProperty getDireccionProperty() {
-        return direccionProperty;
-    }
-
-    public IntegerProperty getCodigoPostalProperty() {
-        return codigoPostalProperty;
-    }
-
-    public StringProperty getCiudadProperty() {
-        return ciudadProperty;
-    }
-
     public ObjectProperty<LocalDate> getFechaNacimientoProperty() {
         return fechaNacimientoProperty;
     }
 
-    // //
-    public void setNombreProperty(String nombre) {
-        this.nombreProperty.set(nombre);
-    }
-
-    public void setApellidosProperty(String apellidos) {
-        this.apellidosProperty.set(apellidos);
-    }
-
-    public void setCiudadProperty(String ciudad) {
-        this.ciudadProperty.set(ciudad);
-    }
-
-    public void setCodigoPostalProperty(int codigoPostal) {
-        this.codigoPostalProperty.set(codigoPostal);
-    }
-
     public void setFechaNacimientoProperty(LocalDate fecha) {
         this.fechaNacimientoProperty.set(fecha);
-    }
-
-    public void setDireccionProperty(String direccion) {
-        this.direccionProperty.set(direccion);
     }
 
 }

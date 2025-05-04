@@ -58,8 +58,8 @@ public class VistaPersonaControlador implements Initializable {
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        nombreColumna.setCellValueFactory(cellData -> cellData.getValue().getNombreProperty());
-        apellidosColumna.setCellValueFactory(cellData -> cellData.getValue().getApellidosProperty());
+        nombreColumna.setCellValueFactory(cellData -> cellData.getValue().nombreProperty());
+        apellidosColumna.setCellValueFactory(cellData -> cellData.getValue().apellidosProperty());
 
         // Borramos los textos de los datos de una persona
         mostrarDetallesPersona(null);
@@ -83,7 +83,6 @@ public class VistaPersonaControlador implements Initializable {
     }
 
     /**
-     * xzx
      * Rellena todos los textos para mostrar los detalles de una persona
      * Si la persona es null, los textos se borran
      *
@@ -92,12 +91,12 @@ public class VistaPersonaControlador implements Initializable {
     private void mostrarDetallesPersona(Persona persona) {
         if (persona != null) {
             // Fill the labels with info from the person object.
-            nombreEtiqueta.setText(persona.getNombreProperty().get());
-            apellidosEtiqueta.setText(persona.getApellidosProperty().get());
-            direccionEtiqueta.setText(persona.getDireccionProperty().get());
-            codigoPostalEtiqueta.setText(persona.getCodigoPostalProperty().toString());
-            ciudadEtiqueta.setText(persona.getCiudadProperty().get());
-            fechaNacimientoEtiqueta.setText(UtilidadDeFechas.formato(persona.getFechaNacimientoProperty().get()));
+            nombreEtiqueta.setText(persona.getNombre());
+            apellidosEtiqueta.setText(persona.getApellidos());
+            direccionEtiqueta.setText(persona.getDireccion());
+            codigoPostalEtiqueta.setText(Integer.toString(persona.getCodigoPostal()));
+            ciudadEtiqueta.setText(persona.getCiudad());
+            fechaNacimientoEtiqueta.setText(UtilidadDeFechas.formato(persona.getFechaNacimiento()));
 
         } else {
             // Person is null, remove all the text.
@@ -113,11 +112,9 @@ public class VistaPersonaControlador implements Initializable {
     @FXML
     private void borrarPersona() {
         int indiceSeleccionado = personaTabla.getSelectionModel().getSelectedIndex();
-        if (indiceSeleccionado >= 0) {
+        if (indiceSeleccionado >= 0)
             personaTabla.getItems().remove(indiceSeleccionado);
-            SistemaGestionPersonas sp = new SistemaGestionPersonas();
-            sp.eliminarPersona(personaTabla.getItems().get(indiceSeleccionado).getId());
-        } else {
+        else {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Atención");
             alert.setHeaderText("Persona no seleccionada");
@@ -133,7 +130,7 @@ public class VistaPersonaControlador implements Initializable {
     @FXML
     private void crearPersona() {
         Persona temporal = new Persona();
-        boolean guardarClicked = libretaDirecciones.muestraCrearPersona(temporal);
+        boolean guardarClicked = libretaDirecciones.muestraEditarPersona(temporal);
         if (guardarClicked) {
             libretaDirecciones.getDatosPersona().add(temporal);
         }

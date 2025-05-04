@@ -106,4 +106,55 @@ public class SistemaGestionPersonas {
         return personas;
     }
 
+    // LEER
+    public Persona buscarPersonaPorId(long id) {
+        EntityManager em = emf.createEntityManager();
+        Persona persona = null;
+
+        try {
+            persona = em.find(Persona.class, id);
+        } finally {
+            em.close();
+        }
+
+        return persona;
+    }
+
+    // ACTUALIZAR
+    public boolean actualizarPersona(long id, String nombre, String apellidos, String direccion, int codigoPostal,
+            String ciudad,
+            LocalDate fechaNacimiento) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        boolean actualizado = false;
+
+        try {
+            tx.begin();
+
+            Persona persona = em.find(Persona.class, id);
+            if (persona != null) {
+
+                persona.setNombre(nombre);
+                persona.setApellidos(apellidos);
+                persona.setDireccion(direccion);
+                persona.setCodigoPostal(codigoPostal);
+                persona.setCiudad(ciudad);
+                persona.setFechaNacimiento(fechaNacimiento);
+
+                em.merge(persona);
+                tx.commit();
+
+                actualizado = true;
+            }
+        } catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
+        return actualizado;
+    }
+
 }

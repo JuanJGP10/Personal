@@ -2,7 +2,6 @@ package proyecto.bdoo;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -29,23 +28,23 @@ public class LibretaDirecciones extends Application {
     private ObservableList<Persona> datosPersona = FXCollections.observableArrayList();
 
     /**
+     * Constructor: inicializa la libreta con datos de ejemplo.
+     */
+    public LibretaDirecciones() {
+        datosPersona.add(new Persona("Aitor", "Tilla"));
+        datosPersona.add(new Persona("Paco", "Jones"));
+        datosPersona.add(new Persona("Victor", "Tazo"));
+        datosPersona.add(new Persona("Aquiles", "Castro"));
+        datosPersona.add(new Persona("Elton", "Tito"));
+        datosPersona.add(new Persona("Aitor", "Menta"));
+    }
+
+    /**
      * Devuelve la lista observable de personas.
      * 
      * @return lista de personas
      */
     public ObservableList<Persona> getDatosPersona() {
-
-        // Creamos el gestor
-        SistemaGestionPersonas sp = new SistemaGestionPersonas();
-
-        List<Persona> listaPDB = sp.obtenerTodasLasPersonas();
-
-        for (int i = 0; i < listaPDB.size(); i++) {
-            Persona p = listaPDB.get(i);
-            Persona pNueva = new Persona(p.getNombre(), p.getApellidos(), p.getDireccion(), p.getCodigoPostal(),
-                    p.getCiudad(), p.getFechaNacimiento());
-            datosPersona.add(pNueva);
-        }
         return datosPersona;
     }
 
@@ -58,7 +57,7 @@ public class LibretaDirecciones extends Application {
         this.escenarioPrincipal.setTitle("Libreta de direcciones");
 
         // Icono de aplicacion
-        this.escenarioPrincipal.getIcons().add(new Image(getClass().getResourceAsStream("persona/icon.png")));
+        this.escenarioPrincipal.getIcons().add(new Image(LibretaDirecciones.class.getResourceAsStream("icon.png")));
 
         // Inicializamos el contenedor principal
         initContenedorPrincipal();
@@ -138,42 +137,6 @@ public class LibretaDirecciones extends Application {
         EditorPersonaControlador controlador = loader.getController();
         controlador.setEscenarioEdicion(escenarioEdicion);
         controlador.setPersona(persona);
-
-        // Muestro el diálogo hasta que el usuario lo cierre
-        escenarioEdicion.showAndWait();
-
-        // devuelvo el botón pulsado
-        return controlador.isGuardarClicked();
-    }
-
-    // Vista editarPersona
-    public boolean muestraCrearPersona(Persona persona) {
-        // Cargo la vista persona a partir de VistaPersona.fxml
-        AnchorPane crearPersona = null;
-        FXMLLoader loader = new FXMLLoader();
-
-        try {
-            URL location = LibretaDirecciones.class.getResource("persona/nuevaPersona.fxml");
-            loader.setLocation(location);
-            crearPersona = (AnchorPane) loader.load();
-        } catch (IOException ex) {
-            // ex.printStackTrace();
-            System.err.println("---------------------------------------");
-            return false;
-        }
-
-        // Creo el escenario de edición (con modal) y establezco la escena
-        Stage escenarioEdicion = new Stage();
-        escenarioEdicion.setTitle("Crear Persona");
-        escenarioEdicion.initModality(Modality.WINDOW_MODAL);
-        escenarioEdicion.initOwner(escenarioPrincipal);
-        Scene escena = new Scene(crearPersona);
-        escenarioEdicion.setScene(escena);
-
-        // Asigno el escenario de edición y la persona seleccionada al controlador
-        EditorPersonaControlador controlador = loader.getController();
-        controlador.setEscenarioEdicion(escenarioEdicion);
-        controlador.setPersona(new Persona(null, null));
 
         // Muestro el diálogo hasta que el usuario lo cierre
         escenarioEdicion.showAndWait();
