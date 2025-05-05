@@ -35,7 +35,9 @@ public class LibretaDirecciones extends Application {
     public LibretaDirecciones() {
 
         List<Persona> listaPDB = sp.obtenerTodasLasPersonas();
-
+        for (Persona p : listaPDB) {
+            p.setters(p.nombre, p.apellidos, p.direccion, p.codigoPostal, p.ciudad, p.fechaNacimiento);
+        }
         datosPersona.addAll(listaPDB);
 
     }
@@ -145,8 +147,7 @@ public class LibretaDirecciones extends Application {
 
         if (controlador.isGuardarClicked() && !crear) {
 
-            sp.actualizarPersona(persona.getId(), persona.getNombreProperty().get(), persona
-                    .getApellidosProperty().get(),
+            sp.actualizarPersona(persona.getId(), persona.getNombre(), persona.getApellidos(),
                     persona.getDireccion(),
                     persona.getCodigoPostal(), persona.getCiudad(),
                     persona.getFechaNacimiento());
@@ -154,8 +155,7 @@ public class LibretaDirecciones extends Application {
 
         if (controlador.isGuardarClicked() && crear) {
 
-            sp.crearPersona(persona.getNombreProperty().get(), persona
-                    .getApellidosProperty().get(),
+            sp.crearPersona(persona.getNombre(), persona.getApellidos(),
                     persona.getDireccion(),
                     persona.getCodigoPostal(), persona.getCiudad(),
                     persona.getFechaNacimiento());

@@ -7,9 +7,6 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.PostLoad;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
 
 import javafx.beans.property.IntegerProperty;
@@ -54,28 +51,14 @@ public class Persona {
 
     }
 
-    // Sincronizar las propiedades JavaFX con los campos persistentes
-    @PostLoad
-    private void onLoad() {
-        System.out.println("ONLOAD");
-        nombreProperty.set(nombre);
-        apellidosProperty.set(apellidos);
-        direccionProperty.set(direccion);
-        codigoPostalProperty.set(codigoPostal);
-        ciudadProperty.set(ciudad);
-        fechaNacimientoProperty.set(fechaNacimiento);
-    }
-
-    @PrePersist
-    @PreUpdate
-    private void onSave() {
-        System.out.println("ONSAVE");
-        nombre = nombreProperty.get();
-        apellidos = apellidosProperty.get();
-        direccion = direccionProperty.get();
-        codigoPostal = codigoPostalProperty.get();
-        ciudad = ciudadProperty.get();
-        fechaNacimiento = fechaNacimientoProperty.get();
+    public void setters(String nombre, String apellidos, String direccion, int codigoPostal, String ciudad,
+            LocalDate fechaNacimiento) {
+        this.setNombreProperty(nombre);
+        this.setApellidosProperty(apellidos);
+        this.setDireccionProperty(direccion);
+        this.setCodigoPostalProperty(codigoPostal);
+        this.setCiudadProperty(ciudad);
+        this.setFechaNacimientoProperty(fechaNacimiento);
     }
 
     public StringProperty getNombreProperty() {
@@ -88,10 +71,6 @@ public class Persona {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -178,4 +157,29 @@ public class Persona {
         this.fechaNacimiento = fecha;
     }
 
+    // getters atributos persistentes
+
+    public String getNombreDB() {
+        return nombre;
+    }
+
+    public String getApellidosDB() {
+        return apellidos;
+    }
+
+    public String getDireccionDB() {
+        return direccion;
+    }
+
+    public int getCodigoPostalDB() {
+        return codigoPostal;
+    }
+
+    public String getCiudadDB() {
+        return ciudad;
+    }
+
+    public LocalDate getFechaNacimientoDB() {
+        return fechaNacimiento;
+    }
 }

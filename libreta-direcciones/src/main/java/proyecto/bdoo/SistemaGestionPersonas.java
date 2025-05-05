@@ -134,12 +134,12 @@ public class SistemaGestionPersonas {
             Persona persona = em.find(Persona.class, id);
             if (persona != null) {
 
-                persona.setNombre(nombre);
-                persona.setApellidos(apellidos);
-                persona.setDireccion(direccion);
-                persona.setCodigoPostal(codigoPostal);
-                persona.setCiudad(ciudad);
-                persona.setFechaNacimiento(fechaNacimiento);
+                persona.setNombreProperty(nombre);
+                persona.setApellidosProperty(apellidos);
+                persona.setDireccionProperty(direccion);
+                persona.setCodigoPostalProperty(codigoPostal);
+                persona.setCiudadProperty(ciudad);
+                persona.setFechaNacimientoProperty(fechaNacimiento);
 
                 em.merge(persona);
                 tx.commit();
