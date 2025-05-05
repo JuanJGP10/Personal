@@ -148,8 +148,8 @@ public class LibretaDirecciones extends Application {
             SistemaGestionPersonas sp = new SistemaGestionPersonas();
             sp.actualizarPersona(persona.getId(), persona.getNombreProperty().get(), persona
                     .getApellidosProperty().get(),
-                    persona.getDireccionProperty().get(),
-                    persona.getCodigoPostalProperty().get(), persona.getCiudadProperty().get(),
+                    persona.getDireccion(),
+                    persona.getCodigoPostal(), persona.getCiudad(),
                     persona.getFechaNacimiento());
         }
 
@@ -157,8 +157,8 @@ public class LibretaDirecciones extends Application {
             SistemaGestionPersonas sp = new SistemaGestionPersonas();
             sp.crearPersona(persona.getNombreProperty().get(), persona
                     .getApellidosProperty().get(),
-                    persona.getDireccionProperty().get(),
-                    persona.getCodigoPostalProperty().get(), persona.getCiudadProperty().get(),
+                    persona.getDireccion(),
+                    persona.getCodigoPostal(), persona.getCiudad(),
                     persona.getFechaNacimiento());
         }
 

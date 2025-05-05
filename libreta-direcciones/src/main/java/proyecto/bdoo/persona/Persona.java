@@ -106,6 +106,14 @@ public class Persona {
         fechaNacimiento = fechaNacimientoProperty.get();
     }
 
+    public StringProperty getNombreProperty() {
+        return nombreProperty;
+    }
+
+    public StringProperty getApellidosProperty() {
+        return apellidosProperty;
+    }
+
     public long getId() {
         return id;
     }

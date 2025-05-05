@@ -95,7 +95,7 @@ public class VistaPersonaControlador implements Initializable {
             nombreEtiqueta.setText(persona.getNombre());
             apellidosEtiqueta.setText(persona.getApellidos());
             direccionEtiqueta.setText(persona.getDireccion());
-            codigoPostalEtiqueta.setText(Integer.parseInt(persona.getCodigoPostal()));
+            codigoPostalEtiqueta.setText(String.valueOf(persona.getCodigoPostal()));
             ciudadEtiqueta.setText(persona.getCiudad());
             fechaNacimientoEtiqueta.setText(UtilidadDeFechas.formato(persona.getFechaNacimiento()));
 
