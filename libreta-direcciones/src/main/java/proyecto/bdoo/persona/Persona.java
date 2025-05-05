@@ -54,34 +54,6 @@ public class Persona {
 
     }
 
-    /**
-     * Constructor con algunos datos iniciales.
-     *
-     * @param nombre    el nombre de la persona
-     * @param apellidos los apellidos de la persona
-     */
-    public Persona(String nombre, String apellidos) {
-        this.nombreProperty = new SimpleStringProperty(nombre);
-        this.apellidosProperty = new SimpleStringProperty(apellidos);
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        // Datos de prueba por defecto
-        this.setDireccionProperty("tu calle");
-        this.setCodigoPostalProperty(3190);
-        this.setCiudadProperty("Pilar de la Horadada");
-        this.setFechaNacimientoProperty(LocalDate.of(2002, 2, 20));
-    }
-
-    public Persona(String nombre, String apellidos, String direccion, int codigoPostal, String ciudad,
-            LocalDate fechaNacimiento) {
-        this.setNombreProperty(nombre);
-        this.setApellidosProperty(apellidos);
-        this.setDireccionProperty(direccion);
-        this.setCodigoPostalProperty(codigoPostal);
-        this.setCiudadProperty(ciudad);
-        this.setFechaNacimientoProperty(fechaNacimiento);
-    }
-
     // Sincronizar las propiedades JavaFX con los campos persistentes
     @PostLoad
     private void onLoad() {
@@ -128,6 +100,7 @@ public class Persona {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+
     }
 
     public void setNombreProperty(String nombre) {
@@ -141,6 +114,7 @@ public class Persona {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+
     }
 
     public void setApellidosProperty(String apellidos) {
@@ -154,6 +128,7 @@ public class Persona {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+
     }
 
     public void setDireccionProperty(String direccion) {
@@ -167,6 +142,7 @@ public class Persona {
 
     public void setCodigoPostal(int codigoPostal) {
         this.codigoPostal = codigoPostal;
+
     }
 
     public void setCodigoPostalProperty(int codigoPostal) {
@@ -180,6 +156,7 @@ public class Persona {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
+
     }
 
     public void setCiudadProperty(String ciudad) {
@@ -193,6 +170,7 @@ public class Persona {
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+
     }
 
     public void setFechaNacimientoProperty(LocalDate fecha) {

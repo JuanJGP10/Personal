@@ -37,12 +37,12 @@ public class SistemaGestionPersonas {
             tx.begin();
 
             persona = new Persona();
-            persona.setNombre(nombre);
-            persona.setApellidos(apellidos);
-            persona.setDireccion(direccion);
-            persona.setCodigoPostal(codigoPostal);
-            persona.setCiudad(ciudad);
-            persona.setFechaNacimiento(fechaNacimiento);
+            persona.setNombreProperty(nombre);
+            persona.setApellidosProperty(apellidos);
+            persona.setDireccionProperty(direccion);
+            persona.setCodigoPostalProperty(codigoPostal);
+            persona.setCiudadProperty(ciudad);
+            persona.setFechaNacimientoProperty(fechaNacimiento);
 
             em.persist(persona);
 

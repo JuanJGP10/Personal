@@ -40,11 +40,11 @@ public class EditorPersonaControlador implements Initializable {
 
     public void setPersona(Persona persona) {
         this.persona = persona;
-        nombreTextField.setText(persona.getNombreProperty().get());
-        apellidosTextField.setText(persona.getApellidosProperty().get());
-        direccionTextField.setText(persona.getDireccionProperty().get());
-        codigoPostalTextField.setText(persona.getCodigoPostalProperty().toString());
-        ciudadTextField.setText(persona.getCiudadProperty().get());
+        nombreTextField.setText(persona.getNombre());
+        apellidosTextField.setText(persona.getApellidos());
+        direccionTextField.setText(persona.getDireccion());
+        codigoPostalTextField.setText(String.valueOf(persona.getCodigoPostal()));
+        ciudadTextField.setText(persona.getCiudad());
         fechaNacimientoTextField.setText(UtilidadDeFechas.formato(persona.getFechaNacimiento()));
         fechaNacimientoTextField.setPromptText("dd/mm/yyyy");
     }

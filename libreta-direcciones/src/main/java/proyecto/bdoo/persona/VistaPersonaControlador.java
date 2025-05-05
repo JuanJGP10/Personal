@@ -1,4 +1,4 @@
-package proyecto.bdoo;
+package proyecto.bdoo.persona;
 
 import java.net.URL;
 
@@ -10,8 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
-import proyecto.bdoo.persona.Persona;
+import proyecto.bdoo.LibretaDirecciones;
+import proyecto.bdoo.SistemaGestionPersonas;
 import proyecto.bdoo.util.UtilidadDeFechas;
 
 public class VistaPersonaControlador implements Initializable {
@@ -45,6 +45,7 @@ public class VistaPersonaControlador implements Initializable {
 
     // Referencia a la clase principal
     private LibretaDirecciones libretaDirecciones;
+    SistemaGestionPersonas sp = new SistemaGestionPersonas();
 
     /**
      * Constructor vacío. Se llama antes de initialize().
@@ -114,18 +115,22 @@ public class VistaPersonaControlador implements Initializable {
     private void borrarPersona() {
         int indiceSeleccionado = personaTabla.getSelectionModel().getSelectedIndex();
         if (indiceSeleccionado >= 0) {
+            // Obtener el ID antes de eliminar
+            long idPersona = personaTabla.getItems().get(indiceSeleccionado).getId();
+
+            // Eliminar de la tabla
             personaTabla.getItems().remove(indiceSeleccionado);
-            SistemaGestionPersonas sp = new SistemaGestionPersonas();
-            sp.eliminarPersona(personaTabla.getItems().get(indiceSeleccionado).getId());
+
+            // Llamar al método para eliminar del sistema
+            sp.eliminarPersona(idPersona);
 
         } else {
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Atención");
             alert.setHeaderText("Persona no seleccionada");
-            alert.setContentText("Porfavor, selecciona una persona para borrar");
+            alert.setContentText("Por favor, selecciona una persona para borrar");
             alert.showAndWait();
         }
-
     }
 
     // Muestro el diálogo editar persona cuando el usuario hace clic en el botón de

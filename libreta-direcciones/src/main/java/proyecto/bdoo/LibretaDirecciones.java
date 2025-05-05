@@ -16,12 +16,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import proyecto.bdoo.persona.EditorPersonaControlador;
 import proyecto.bdoo.persona.Persona;
+import proyecto.bdoo.persona.VistaPersonaControlador;
 
 public class LibretaDirecciones extends Application {
 
     private Stage escenarioPrincipal;
     private BorderPane contenedorPrincipal;
-
+    SistemaGestionPersonas sp = new SistemaGestionPersonas();
     /**
      * Lista observable con los datos de personas.
      * Esta lista se puede vincular a una TableView.
@@ -32,8 +33,6 @@ public class LibretaDirecciones extends Application {
      * Constructor: inicializa la libreta con datos de ejemplo.
      */
     public LibretaDirecciones() {
-        // Creamos el gestor
-        SistemaGestionPersonas sp = new SistemaGestionPersonas();
 
         List<Persona> listaPDB = sp.obtenerTodasLasPersonas();
 
@@ -60,7 +59,7 @@ public class LibretaDirecciones extends Application {
         this.escenarioPrincipal.setTitle("Libreta de direcciones");
 
         // Icono de aplicacion
-        this.escenarioPrincipal.getIcons().add(new Image(getClass().getResourceAsStream("persona/icon.png")));
+        this.escenarioPrincipal.getIcons().add(new Image(getClass().getResourceAsStream("images/icon.png")));
 
         // Inicializamos el contenedor principal
         initContenedorPrincipal();
@@ -99,7 +98,7 @@ public class LibretaDirecciones extends Application {
     public void mostrarVistaPersona() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(LibretaDirecciones.class.getResource("vistaPersona.fxml"));
+            loader.setLocation(LibretaDirecciones.class.getResource("persona/vistaPersona.fxml"));
             AnchorPane personOverview = loader.load();
 
             contenedorPrincipal.setCenter(personOverview);
@@ -145,7 +144,7 @@ public class LibretaDirecciones extends Application {
         escenarioEdicion.showAndWait();
 
         if (controlador.isGuardarClicked() && !crear) {
-            SistemaGestionPersonas sp = new SistemaGestionPersonas();
+
             sp.actualizarPersona(persona.getId(), persona.getNombreProperty().get(), persona
                     .getApellidosProperty().get(),
                     persona.getDireccion(),
@@ -154,7 +153,7 @@ public class LibretaDirecciones extends Application {
         }
 
         if (controlador.isGuardarClicked() && crear) {
-            SistemaGestionPersonas sp = new SistemaGestionPersonas();
+
             sp.crearPersona(persona.getNombreProperty().get(), persona
                     .getApellidosProperty().get(),
                     persona.getDireccion(),
