@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import proyecto.bdoo.persona.EditorPersonaControlador;
 import proyecto.bdoo.persona.Persona;
+import proyecto.bdoo.util.UtilidadDeFechas;
 
 public class LibretaDirecciones extends Application {
 
@@ -111,7 +112,7 @@ public class LibretaDirecciones extends Application {
     }
 
     // Vista editarPersona
-    public boolean muestraEditarPersona(Persona persona) {
+    public boolean muestraEditarPersona(Persona persona, boolean crear) {
         // Cargo la vista persona a partir de VistaPersona.fxml
         AnchorPane editarPersona = null;
         FXMLLoader loader = new FXMLLoader();
@@ -141,6 +142,24 @@ public class LibretaDirecciones extends Application {
 
         // Muestro el diálogo hasta que el usuario lo cierre
         escenarioEdicion.showAndWait();
+
+        if (controlador.isGuardarClicked() && !crear) {
+            SistemaGestionPersonas sp = new SistemaGestionPersonas();
+            sp.actualizarPersona(persona.getId(), persona.getNombreProperty().get(), persona
+                    .getApellidosProperty().get(),
+                    persona.getDireccionProperty().get(),
+                    persona.getCodigoPostalProperty().get(), persona.getCiudadProperty().get(),
+                    persona.getFechaNacimientoProperty().get());
+        }
+
+        if (controlador.isGuardarClicked() && crear) {
+            SistemaGestionPersonas sp = new SistemaGestionPersonas();
+            sp.crearPersona(persona.getId(), persona.getNombreProperty().get(), persona
+                    .getApellidosProperty().get(),
+                    persona.getDireccionProperty().get(),
+                    persona.getCodigoPostalProperty().get(), persona.getCiudadProperty().get(),
+                    persona.getFechaNacimientoProperty().get());
+        }
 
         // devuelvo el botón pulsado
         return controlador.isGuardarClicked();
