@@ -16,7 +16,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import proyecto.bdoo.persona.EditorPersonaControlador;
 import proyecto.bdoo.persona.Persona;
-import proyecto.bdoo.util.UtilidadDeFechas;
 
 public class LibretaDirecciones extends Application {
 
@@ -30,23 +29,25 @@ public class LibretaDirecciones extends Application {
     private ObservableList<Persona> datosPersona = FXCollections.observableArrayList();
 
     /**
+     * Constructor: inicializa la libreta con datos de ejemplo.
+     */
+    public LibretaDirecciones() {
+        // Creamos el gestor
+        SistemaGestionPersonas sp = new SistemaGestionPersonas();
+
+        List<Persona> listaPDB = sp.obtenerTodasLasPersonas();
+
+        datosPersona.addAll(listaPDB);
+
+    }
+
+    /**
      * Devuelve la lista observable de personas.
      * 
      * @return lista de personas
      */
     public ObservableList<Persona> getDatosPersona() {
 
-        // Creamos el gestor
-        SistemaGestionPersonas sp = new SistemaGestionPersonas();
-
-        List<Persona> listaPDB = sp.obtenerTodasLasPersonas();
-
-        for (int i = 0; i < listaPDB.size(); i++) {
-            Persona p = listaPDB.get(i);
-            Persona pNueva = new Persona(p.getNombre(), p.getApellidos(), p.getDireccion(), p.getCodigoPostal(),
-                    p.getCiudad(), p.getFechaNacimiento());
-            datosPersona.add(pNueva);
-        }
         return datosPersona;
     }
 
@@ -149,53 +150,17 @@ public class LibretaDirecciones extends Application {
                     .getApellidosProperty().get(),
                     persona.getDireccionProperty().get(),
                     persona.getCodigoPostalProperty().get(), persona.getCiudadProperty().get(),
-                    persona.getFechaNacimientoProperty().get());
+                    persona.getFechaNacimiento());
         }
 
         if (controlador.isGuardarClicked() && crear) {
             SistemaGestionPersonas sp = new SistemaGestionPersonas();
-            sp.crearPersona(persona.getId(), persona.getNombreProperty().get(), persona
+            sp.crearPersona(persona.getNombreProperty().get(), persona
                     .getApellidosProperty().get(),
                     persona.getDireccionProperty().get(),
                     persona.getCodigoPostalProperty().get(), persona.getCiudadProperty().get(),
-                    persona.getFechaNacimientoProperty().get());
+                    persona.getFechaNacimiento());
         }
-
-        // devuelvo el botón pulsado
-        return controlador.isGuardarClicked();
-    }
-
-    // Vista editarPersona
-    public boolean muestraCrearPersona(Persona persona) {
-        // Cargo la vista persona a partir de VistaPersona.fxml
-        AnchorPane crearPersona = null;
-        FXMLLoader loader = new FXMLLoader();
-
-        try {
-            URL location = LibretaDirecciones.class.getResource("persona/nuevaPersona.fxml");
-            loader.setLocation(location);
-            crearPersona = (AnchorPane) loader.load();
-        } catch (IOException ex) {
-            // ex.printStackTrace();
-            System.err.println("---------------------------------------");
-            return false;
-        }
-
-        // Creo el escenario de edición (con modal) y establezco la escena
-        Stage escenarioEdicion = new Stage();
-        escenarioEdicion.setTitle("Crear Persona");
-        escenarioEdicion.initModality(Modality.WINDOW_MODAL);
-        escenarioEdicion.initOwner(escenarioPrincipal);
-        Scene escena = new Scene(crearPersona);
-        escenarioEdicion.setScene(escena);
-
-        // Asigno el escenario de edición y la persona seleccionada al controlador
-        EditorPersonaControlador controlador = loader.getController();
-        controlador.setEscenarioEdicion(escenarioEdicion);
-        controlador.setPersona(new Persona(null, null));
-
-        // Muestro el diálogo hasta que el usuario lo cierre
-        escenarioEdicion.showAndWait();
 
         // devuelvo el botón pulsado
         return controlador.isGuardarClicked();

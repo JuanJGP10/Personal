@@ -92,12 +92,12 @@ public class VistaPersonaControlador implements Initializable {
     private void mostrarDetallesPersona(Persona persona) {
         if (persona != null) {
             // Fill the labels with info from the person object.
-            nombreEtiqueta.setText(persona.getNombreProperty().get());
-            apellidosEtiqueta.setText(persona.getApellidosProperty().get());
-            direccionEtiqueta.setText(persona.getDireccionProperty().get());
-            codigoPostalEtiqueta.setText(persona.getCodigoPostalProperty().toString());
-            ciudadEtiqueta.setText(persona.getCiudadProperty().get());
-            fechaNacimientoEtiqueta.setText(UtilidadDeFechas.formato(persona.getFechaNacimientoProperty().get()));
+            nombreEtiqueta.setText(persona.getNombre());
+            apellidosEtiqueta.setText(persona.getApellidos());
+            direccionEtiqueta.setText(persona.getDireccion());
+            codigoPostalEtiqueta.setText(Integer.parseInt(persona.getCodigoPostal()));
+            ciudadEtiqueta.setText(persona.getCiudad());
+            fechaNacimientoEtiqueta.setText(UtilidadDeFechas.formato(persona.getFechaNacimiento()));
 
         } else {
             // Person is null, remove all the text.
@@ -117,6 +117,7 @@ public class VistaPersonaControlador implements Initializable {
             personaTabla.getItems().remove(indiceSeleccionado);
             SistemaGestionPersonas sp = new SistemaGestionPersonas();
             sp.eliminarPersona(personaTabla.getItems().get(indiceSeleccionado).getId());
+
         } else {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Atención");

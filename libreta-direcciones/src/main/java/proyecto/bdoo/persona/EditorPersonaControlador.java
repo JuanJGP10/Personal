@@ -3,7 +3,6 @@ package proyecto.bdoo.persona;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import proyecto.bdoo.SistemaGestionPersonas;
 import proyecto.bdoo.util.UtilidadDeFechas;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,7 +45,7 @@ public class EditorPersonaControlador implements Initializable {
         direccionTextField.setText(persona.getDireccionProperty().get());
         codigoPostalTextField.setText(persona.getCodigoPostalProperty().toString());
         ciudadTextField.setText(persona.getCiudadProperty().get());
-        fechaNacimientoTextField.setText(UtilidadDeFechas.formato(persona.getFechaNacimientoProperty().get()));
+        fechaNacimientoTextField.setText(UtilidadDeFechas.formato(persona.getFechaNacimiento()));
         fechaNacimientoTextField.setPromptText("dd/mm/yyyy");
     }
 
@@ -65,12 +64,6 @@ public class EditorPersonaControlador implements Initializable {
             persona.setFechaNacimientoProperty(UtilidadDeFechas.convertir(fechaNacimientoTextField.getText()));
             guardarClicked = true;
             escenarioEdicion.close();
-
-            SistemaGestionPersonas sp = new SistemaGestionPersonas();
-            sp.actualizarPersona(persona.getId(), nombreTextField.getText(), apellidosTextField.getText(),
-                    direccionTextField.getText(),
-                    Integer.parseInt(codigoPostalTextField.getText()), ciudadTextField.getText(),
-                    UtilidadDeFechas.convertir(fechaNacimientoTextField.getText()));
         }
     }
 
