@@ -133,7 +133,7 @@ public class VistaPersonaControlador implements Initializable {
     @FXML
     private void crearPersona() {
         Persona temporal = new Persona();
-        boolean guardarClicked = libretaDirecciones.muestraCrearPersona(temporal);
+        boolean guardarClicked = libretaDirecciones.muestraEditarPersona(temporal, true);
         if (guardarClicked) {
             libretaDirecciones.getDatosPersona().add(temporal);
         }
@@ -146,7 +146,7 @@ public class VistaPersonaControlador implements Initializable {
     private void editarPersona() {
         Persona seleccionada = personaTabla.getSelectionModel().getSelectedItem();
         if (seleccionada != null) {
-            boolean guardarClicked = libretaDirecciones.muestraEditarPersona(seleccionada);
+            boolean guardarClicked = libretaDirecciones.muestraEditarPersona(seleccionada, false);
             if (guardarClicked) {
                 mostrarDetallesPersona(seleccionada);
             }
