@@ -45,7 +45,7 @@ public class VistaPersonaControlador implements Initializable {
 
     // Referencia a la clase principal
     private LibretaDirecciones libretaDirecciones;
-    SistemaGestionPersonas sp = new SistemaGestionPersonas();
+    private static SistemaGestionPersonas sp = new SistemaGestionPersonas();
 
     /**
      * Constructor vacío. Se llama antes de initialize().

@@ -2,10 +2,9 @@ package proyecto.bdoo.persona;
 
 import java.time.LocalDate;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
@@ -17,19 +16,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 @Entity
-@Access(AccessType.FIELD)
 public class Persona {
 
     @Id
-    @GeneratedValue
-    public long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public String nombre;
-    public String apellidos;
-    public String direccion;
-    public int codigoPostal;
-    public String ciudad;
-    public LocalDate fechaNacimiento;
+    private String nombre;
+    private String apellidos;
+    private String direccion;
+    private int codigoPostal;
+    private String ciudad;
+    private LocalDate fechaNacimiento;
 
     @Transient
     private StringProperty nombreProperty = new SimpleStringProperty();
@@ -51,7 +49,7 @@ public class Persona {
 
     }
 
-    public void setters(String nombre, String apellidos, String direccion, int codigoPostal, String ciudad,
+    public void allSetters(String nombre, String apellidos, String direccion, int codigoPostal, String ciudad,
             LocalDate fechaNacimiento) {
         this.setNombreProperty(nombre);
         this.setApellidosProperty(apellidos);

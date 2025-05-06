@@ -22,7 +22,7 @@ public class LibretaDirecciones extends Application {
 
     private Stage escenarioPrincipal;
     private BorderPane contenedorPrincipal;
-    SistemaGestionPersonas sp = new SistemaGestionPersonas();
+    private static SistemaGestionPersonas sp = new SistemaGestionPersonas();
     /**
      * Lista observable con los datos de personas.
      * Esta lista se puede vincular a una TableView.
@@ -36,7 +36,9 @@ public class LibretaDirecciones extends Application {
 
         List<Persona> listaPDB = sp.obtenerTodasLasPersonas();
         for (Persona p : listaPDB) {
-            p.setters(p.nombre, p.apellidos, p.direccion, p.codigoPostal, p.ciudad, p.fechaNacimiento);
+            p.allSetters(p.getNombreDB(), p.getApellidosDB(), p.getDireccionDB(), p.getCodigoPostalDB(),
+                    p.getCiudadDB(),
+                    p.getFechaNacimientoDB());
         }
         datosPersona.addAll(listaPDB);
 
@@ -87,6 +89,7 @@ public class LibretaDirecciones extends Application {
             escenarioPrincipal.setWidth(815);
             escenarioPrincipal.setMinWidth(815);
             escenarioPrincipal.setMinHeight(475);
+            escenarioPrincipal.setResizable(false);
             escenarioPrincipal.show();
         } catch (IOException e) {
             e.printStackTrace();
