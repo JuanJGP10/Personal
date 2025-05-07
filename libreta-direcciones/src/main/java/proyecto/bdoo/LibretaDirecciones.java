@@ -3,12 +3,16 @@ package proyecto.bdoo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -65,6 +69,27 @@ public class LibretaDirecciones extends Application {
         // Icono de aplicacion
         this.escenarioPrincipal.getIcons().add(new Image(getClass().getResourceAsStream("images/icon.png")));
 
+        // Alerta al salir
+        escenarioPrincipal.setOnCloseRequest(ventana -> {
+            Alert alertaCierre = new Alert(AlertType.CONFIRMATION);
+
+            // Cambiar ícono del diálogo
+            Stage stage = (Stage) alertaCierre.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(LibretaDirecciones.class.getResourceAsStream("images/exit.png")));
+
+            alertaCierre.getDialogPane().getStylesheets()
+                    .add(getClass().getResource("css/darkTheme.css").toExternalForm());
+            alertaCierre.getDialogPane().getStyleClass().add("alertas");
+
+            alertaCierre.setTitle("Exit");
+            alertaCierre.setHeaderText("Intentando salir. Los datos se guardarán en la base de datos");
+            alertaCierre.setContentText("Estas seguro de que quieres salir?");
+            Optional<ButtonType> resultado = alertaCierre.showAndWait();
+            if (resultado.isPresent() && resultado.get() != ButtonType.OK) {
+                ventana.consume();
+            }
+        });
+
         // Inicializamos el contenedor principal
         initContenedorPrincipal();
 
@@ -84,6 +109,8 @@ public class LibretaDirecciones extends Application {
 
             // Creamos la escena con el contenedor y la asignamos al escenario principal
             Scene scene = new Scene(contenedorPrincipal);
+            escenarioPrincipal.setMinHeight(450);
+            escenarioPrincipal.setMinWidth(675);
             escenarioPrincipal.setScene(scene);
             escenarioPrincipal.show();
         } catch (IOException e) {
@@ -134,6 +161,8 @@ public class LibretaDirecciones extends Application {
         escenarioEdicion.initOwner(escenarioPrincipal);
         Scene escena = new Scene(editarPersona);
         escenarioEdicion.setScene(escena);
+        escenarioEdicion.getIcons().add(new Image(LibretaDirecciones.class.getResourceAsStream("images/editar.png")));
+        escenarioEdicion.setResizable(false);
 
         // Asigno el escenario de edición y la persona seleccionada al controlador
         EditorPersonaControlador controlador = loader.getController();

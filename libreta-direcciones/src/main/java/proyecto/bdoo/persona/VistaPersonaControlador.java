@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import proyecto.bdoo.LibretaDirecciones;
 import proyecto.bdoo.SistemaGestionPersonas;
 import proyecto.bdoo.util.UtilidadDeFechas;
@@ -126,6 +128,15 @@ public class VistaPersonaControlador implements Initializable {
 
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
+
+            // Cambiar ícono del diálogo
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(LibretaDirecciones.class.getResourceAsStream("images/alert.png")));
+
+            alert.getDialogPane().getStylesheets()
+                    .add(LibretaDirecciones.class.getResource("css/darkTheme.css").toExternalForm());
+            alert.getDialogPane().getStyleClass().add("alertas");
+
             alert.setTitle("Atención");
             alert.setHeaderText("Persona no seleccionada");
             alert.setContentText("Por favor, selecciona una persona para borrar");
@@ -159,6 +170,11 @@ public class VistaPersonaControlador implements Initializable {
         } else {
             // Muestro alerta
             Alert alerta = new Alert(Alert.AlertType.WARNING);
+
+            alerta.getDialogPane().getStylesheets()
+                    .add(LibretaDirecciones.class.getResource("css/darkTheme.css").toExternalForm());
+            alerta.getDialogPane().getStyleClass().add("alertas");
+
             alerta.setTitle("Alerta");
             alerta.setHeaderText("Persona no seleccionada");
             alerta.setContentText("Por favor, selecciona una persona");

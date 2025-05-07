@@ -3,11 +3,13 @@ package proyecto.bdoo.persona;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import proyecto.bdoo.LibretaDirecciones;
 import proyecto.bdoo.util.UtilidadDeFechas;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class EditorPersonaControlador implements Initializable {
@@ -108,6 +110,15 @@ public class EditorPersonaControlador implements Initializable {
             return true;
         } else {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
+
+            // Cambiar ícono del diálogo
+            Stage stage = (Stage) alerta.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(LibretaDirecciones.class.getResourceAsStream("images/alert.png")));
+
+            alerta.getDialogPane().getStylesheets()
+                    .add(LibretaDirecciones.class.getResource("css/darkTheme.css").toExternalForm());
+            alerta.getDialogPane().getStyleClass().add("alertas");
+
             alerta.setTitle("Error");
             alerta.setHeaderText("Datos no válidos");
             alerta.setContentText("Por favor, corrige los errores");
