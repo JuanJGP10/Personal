@@ -9,9 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" stylesheets="@../css/darkTheme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.bdoo.persona.VistaPersonaControlador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/darkTheme.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyecto.bdoo.persona.VistaPersonaControlador">
    <children>
       <SplitPane dividerPositions="0.37625" layoutX="20.0" layoutY="49.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -86,9 +87,16 @@
                      <padding>
                         <Insets left="8.0" />
                      </padding></Label>
-                  <Button layoutX="112.0" layoutY="352.0" mnemonicParsing="false" onAction="#editarPersona" text="Editar" />
-                  <Button layoutX="204.0" layoutY="352.0" mnemonicParsing="false" onAction="#borrarPersona" text="Borrar" />
-                  <Button layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#crearPersona" text="Nuevo" />
+                  <HBox alignment="BOTTOM_LEFT" layoutX="7.0" layoutY="343.0" prefHeight="49.0" prefWidth="316.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#editarPersona" text="Editar" />
+                        <Button mnemonicParsing="false" onAction="#borrarPersona" text="Borrar" />
+                        <Button mnemonicParsing="false" onAction="#crearPersona" text="Nuevo" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" />
+                     </padding>
+                  </HBox>
                </children>
             </AnchorPane>
         </items>
