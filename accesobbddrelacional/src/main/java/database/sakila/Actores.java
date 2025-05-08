@@ -13,6 +13,7 @@ import java.sql.Statement;
  */
 public class Actores {
     public static void main(String[] args) {
+
         String url = "jdbc:mysql://localhost:3306/sakila";
         String sentenciasql = "select * from actor";
         try (Connection conn = DriverManager.getConnection(url, "root", "");
@@ -29,5 +30,6 @@ public class Actores {
             System.out.println("Error al conectar a la base de datos");
             e.printStackTrace();
         }
+
     }
 }

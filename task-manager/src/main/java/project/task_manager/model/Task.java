@@ -1,11 +1,16 @@
 package project.task_manager.model;
 
-public class Tarea {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tasks")
+public class Task {
     private Long id;
     private String titulo;
     private boolean completada;
 
-    public Tarea(Long id, String titulo, boolean completada) {
+    public Task(Long id, String titulo, boolean completada) {
         this.id = id;
         this.titulo = titulo;
         this.completada = completada;
